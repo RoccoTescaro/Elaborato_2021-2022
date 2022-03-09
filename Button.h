@@ -35,12 +35,18 @@ public:
     void setClicked();
 
     bool isClicked() const;
+    
+    void setActive(bool active_);
+
+    bool isActive() const;
 
     //RENDER
     void render(sf::RenderWindow& window_, sf::Shader* shader = nullptr);
 
 private:
 
+    bool active = true;
+    
     bool clicked = false;
 
     sf::Vector2<float> pos;
