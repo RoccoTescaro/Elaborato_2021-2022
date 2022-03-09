@@ -52,6 +52,14 @@ bool Button::isClicked() const {
     return clicked;
 }
 
+void Button::setActive(bool active_) {
+    active = active_;
+}
+
+bool Button::isActive() const {
+    return active;
+}
+
 void Button::render(sf::RenderWindow& window_, sf::Shader* shader) {
     window_.draw(sprite, shader);
     window_.draw(text);
