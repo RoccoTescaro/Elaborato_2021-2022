@@ -45,13 +45,17 @@ public:
 
 private:
 
+    //STATE
     bool active = true;
-    
+
     bool clicked = false;
 
+    //POSITION
     sf::Vector2<float> pos;
+
     sf::Vector2<int> dim;
 
+    //RENDER
     sf::Sprite sprite;
 
     sf::Text text;
