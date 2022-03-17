@@ -8,7 +8,7 @@ class Application;
 class State {
 public:
     State(Application* app_):app(app_){};
-    virtual ~State() {};
+    virtual ~State() = 0;
     virtual void update();
     virtual void render();
 protected:
