@@ -1,4 +1,4 @@
-#include "Button.h"
+#include "../headers/Button.h"
 
 void Button::setTexture(const sf::Texture& texture_) {
     sprite.setTexture(texture_);
@@ -61,6 +61,7 @@ bool Button::isActive() const {
 }
 
 void Button::render(sf::RenderWindow& window_, sf::Shader* shader) {
-    window_.draw(sprite, shader);
+    if(shader)window_.draw(sprite, shader);
+    else window_.draw(sprite);
     window_.draw(text);
 }

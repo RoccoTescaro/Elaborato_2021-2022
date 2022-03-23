@@ -10,7 +10,10 @@ public:
     void update() override;
     void render() override;
 private:
+    sf::Font titleFont;
     sf::Text title;
+
+    sf::Font buttonFont;
     Button start;
     Button exit;
 };
