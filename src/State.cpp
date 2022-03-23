@@ -1,5 +1,6 @@
 #include "../headers/State.h"
+//#include "../headers/Application.h"
 
-//=====================================================
-//THIS FILE MIGHT BE DELETED, NOTHING TO IMPLEMENT HERE
-//=====================================================
+State::~State() {
+    delete app;
+}

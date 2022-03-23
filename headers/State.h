@@ -7,11 +7,13 @@ class Application;
 
 class State {
 public:
-    State(Application* app_):app(app_){};
-    virtual ~State() = 0;
-    virtual void update();
-    virtual void render();
+    State(Application* app_,sf::RenderWindow& window_,const float& dt_):app(app_),window(window_),dt(dt_){};
+    virtual ~State();
+    virtual void update() = 0;
+    virtual void render() = 0;
 protected:
+    sf::RenderWindow& window;
+    const float& dt;
     //Input& input;
     Application* app;
 };
