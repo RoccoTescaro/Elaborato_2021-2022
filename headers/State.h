@@ -9,8 +9,8 @@ class State {
 public:
     State(Application* app_):app(app_){};
     virtual ~State() = 0;
-    virtual void update();
-    virtual void render();
+    virtual void update() = 0;
+    virtual void render() = 0;
 protected:
     //Input& input;
     Application* app;
