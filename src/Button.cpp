@@ -20,6 +20,10 @@ std::string Button::getTextString() const {
     return text.getString();
 }
 
+sf::FloatRect Button::getTextBound() const {
+    return text.getGlobalBounds();
+}
+
 void Button::setFont(const sf::Font& font_) {
     text.setFont(font_);
 }

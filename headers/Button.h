@@ -17,6 +17,8 @@ public:
 
     std::string getTextString() const;
 
+    sf::FloatRect getTextBound() const;
+
     void setText(const std::string& string_);
 
     void setFont(const sf::Font& font_);
