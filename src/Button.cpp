@@ -41,7 +41,8 @@ void Button::setTextColor(const sf::Color& color_) {
 }
 
 bool Button::isMouseOver(const sf::Vector2<float>& pos_) const {
-    return (pos.x<pos_.x && pos_.x<pos.x+dim.x)&&(pos.y<pos_.y && pos_.y<pos.x+dim.y);
+    sf::FloatRect bound{pos,sf::Vector2<float>(dim)};
+    return bound.contains(pos_);
 }
 
 void Button::setClicked(bool clicked_) {

@@ -2,7 +2,7 @@
 #define STATE_H
 
 #include <SFML/Graphics.hpp>
-//#include "../headers/Input.h"
+#include "Input.h"
 class Application;
 
 class State {
@@ -14,7 +14,7 @@ public:
 protected:
     sf::RenderWindow& window;
     const float& dt;
-    //Input& input;
+    Input input{};
     Application* app;
 };
 

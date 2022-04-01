@@ -16,8 +16,8 @@ exit(sf::Vector2<float>(0,window_.getSize().y*0.125*6),sf::Vector2<int>(window_.
     background.setScale((float)window.getSize().x/texBackground.getSize().x,(float)window.getSize().x/texBackground.getSize().x);
 
     //FONTS
-    titleFont.loadFromFile("../fonts/schreibmaschine.regular.ttf");
-    buttonFont.loadFromFile("../fonts/StintUltraCondensed-Regular.ttf");
+    titleFont.loadFromFile("../fonts/titleFont2.ttf");
+    buttonFont.loadFromFile("../fonts/buttonFont1.ttf");
 
     //TITLE
     title.setFillColor(sf::Color(0,0,0,255));
@@ -45,6 +45,21 @@ exit(sf::Vector2<float>(0,window_.getSize().y*0.125*6),sf::Vector2<int>(window_.
 
 void Menu::update() {
     time += dt;
+    input.updateKeys(window);
+
+    //UPDATE RENDERER
+    if(start.isMouseOver(input.getMousePos())){
+        start.setTextColor(sf::Color(255,255,255,255));
+        if(input.getKeyState(input.MouseL)) start.setClicked(true);
+    }
+    else if(exit.isMouseOver(input.getMousePos())){
+        exit.setTextColor(sf::Color(255,255,255,255));
+        if(input.getKeyState(input.MouseL)) exit.setClicked(true);
+    }else{
+        start.setTextColor(sf::Color(0,0,0,255));
+        exit.setTextColor(sf::Color(0,0,0,255));
+    }
+
 }
 
 void Menu::render() {

@@ -23,7 +23,7 @@ private:
     Button start;
     Button exit;
 
-    float time;
+    float time = 0.;
 };
 
 
