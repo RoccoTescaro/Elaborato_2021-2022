@@ -12,18 +12,22 @@ public:
 private:
     sf::Shader vignetteShader;
     sf::RectangleShape vignette;
+    float vignetteRadius = 1.0f;
+    const float vignetteRadiusOffset = .35f;
+    const float vignetteRadiusAmplitude = .15f;
+    bool switchScene = false;
+    float time = 0;
 
     sf::Texture texBackground;
+
     sf::Sprite background;
-
     sf::Font titleFont;
-    sf::Text title;
 
+    sf::Text title;
     sf::Font buttonFont;
     Button start;
-    Button exit;
 
-    float time = 0.;
+    Button exit;
 };
 
 

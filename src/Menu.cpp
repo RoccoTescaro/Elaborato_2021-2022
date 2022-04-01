@@ -1,4 +1,5 @@
 #include <iostream>
+#include <valarray>
 #include "../headers/Menu.h"
 
 Menu::Menu(Application* app_,sf::RenderWindow& window_,const float& dt_) :
@@ -44,26 +45,36 @@ exit(sf::Vector2<float>(0,window_.getSize().y*0.125*6),sf::Vector2<int>(window_.
 }
 
 void Menu::update() {
-    time += dt;
+    time +=dt ;
     input.updateKeys(window);
 
     //UPDATE RENDERER
+    //vignette
+    if(switchScene) {
+        vignetteRadius = vignetteRadius-vignetteRadius*dt;
+    }else{
+        vignetteRadius = vignetteRadiusOffset+sinf(time)*vignetteRadiusAmplitude;
+    }
+    vignetteShader.setUniform("radius",vignetteRadius);
+
+    //buttons
+    start.setTextColor(sf::Color(0,0,0,255));
+    exit.setTextColor(sf::Color(0,0,0,255));
+
     if(start.isMouseOver(input.getMousePos())){
         start.setTextColor(sf::Color(255,255,255,255));
-        if(input.getKeyState(input.MouseL)) start.setClicked(true);
+        if(input.getKeyState(Input::keys::MouseL)) {
+            switchScene = true;
+        }
     }
     else if(exit.isMouseOver(input.getMousePos())){
         exit.setTextColor(sf::Color(255,255,255,255));
-        if(input.getKeyState(input.MouseL)) exit.setClicked(true);
-    }else{
-        start.setTextColor(sf::Color(0,0,0,255));
-        exit.setTextColor(sf::Color(0,0,0,255));
+        if(input.getKeyState(Input::keys::MouseL)) exit.setClicked(true);
     }
 
 }
 
 void Menu::render() {
-    vignetteShader.setUniform("time",time);
     window.draw(background);
     window.draw(title);
     start.render(window);
