@@ -51,11 +51,12 @@ void Menu::update() {
     //UPDATE RENDERER
     //vignette
     if(switchScene) {
-        vignetteRadius = vignetteRadius-vignetteRadius*dt;
+        vignetteIntensity = vignetteIntensity-vignetteIntensity*dt;
     }else{
-        vignetteRadius = vignetteRadiusOffset+sinf(time)*vignetteRadiusAmplitude;
+        vignetteRadius = .75f+fabsf(sinf(time*0.5f))*0.5f;
     }
     vignetteShader.setUniform("radius",vignetteRadius);
+    vignetteShader.setUniform("intensity",vignetteIntensity);
 
     //buttons
     start.setTextColor(sf::Color(0,0,0,255));
@@ -69,7 +70,9 @@ void Menu::update() {
     }
     else if(exit.isMouseOver(input.getMousePos())){
         exit.setTextColor(sf::Color(255,255,255,255));
-        if(input.getKeyState(Input::keys::MouseL)) exit.setClicked(true);
+        if(input.getKeyState(Input::keys::MouseL)){
+            window.close();
+        }
     }
 
 }

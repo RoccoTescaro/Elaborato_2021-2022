@@ -12,9 +12,8 @@ public:
 private:
     sf::Shader vignetteShader;
     sf::RectangleShape vignette;
-    float vignetteRadius = 1.0f;
-    const float vignetteRadiusOffset = .35f;
-    const float vignetteRadiusAmplitude = .15f;
+    float vignetteRadius = 1.5f;
+    float vignetteIntensity = 15.f;
     bool switchScene = false;
     float time = 0;
 
