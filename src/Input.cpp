@@ -28,7 +28,7 @@ void Input::updateKeys( sf::RenderWindow &window) {
     KeyPressed[Input::keys::D]=sf::Keyboard::isKeyPressed(sf::Keyboard::D);
     KeyPressed[Input::keys::MouseR]=sf::Mouse::isButtonPressed(sf::Mouse::Right);
     KeyPressed[Input::keys::MouseL]=sf::Mouse::isButtonPressed(sf::Mouse::Left);
-    KeyPressed[Input::keys::Enter]=sf::Mouse::isButtonPressed(sf::Mouse::Left);
+    KeyPressed[Input::keys::Enter]=sf::Keyboard::isKeyPressed(sf::Keyboard::Enter);
 
 
 }
