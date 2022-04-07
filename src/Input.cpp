@@ -2,7 +2,7 @@
 // Created by lapo on 10/03/2022.
 //
 
-#include "Input.h"
+#include "../headers/Input.h"
 
 const sf::Vector2f &Input::getMousePos() const {
 
@@ -14,24 +14,25 @@ bool Input::getKeyState(Input::keys key) {
     return KeyPressed[key];
 }
 
+
+
 void Input::updateKeys( sf::RenderWindow &window) {
 
     sf::Vector2i relativePos = sf::Mouse::getPosition(window);
 
     MousePos= window.mapPixelToCoords(relativePos);
 
-    KeyPressed[0]=sf::Keyboard::isKeyPressed(sf::Keyboard::W);
-    KeyPressed[1]=sf::Keyboard::isKeyPressed(sf::Keyboard::A);
-    KeyPressed[2]=sf::Keyboard::isKeyPressed(sf::Keyboard::S);
-    KeyPressed[3]=sf::Keyboard::isKeyPressed(sf::Keyboard::D);
-    KeyPressed[4]=sf::Mouse::isButtonPressed(sf::Mouse::Right);
-    KeyPressed[5]=sf::Mouse::isButtonPressed(sf::Mouse::Left);
+    KeyPressed[Input::keys::W]=sf::Keyboard::isKeyPressed(sf::Keyboard::W);
+    KeyPressed[Input::keys::A]=sf::Keyboard::isKeyPressed(sf::Keyboard::A);
+    KeyPressed[Input::keys::S]=sf::Keyboard::isKeyPressed(sf::Keyboard::S);
+    KeyPressed[Input::keys::D]=sf::Keyboard::isKeyPressed(sf::Keyboard::D);
+    KeyPressed[Input::keys::MouseR]=sf::Mouse::isButtonPressed(sf::Mouse::Right);
+    KeyPressed[Input::keys::MouseL]=sf::Mouse::isButtonPressed(sf::Mouse::Left);
+    KeyPressed[Input::keys::Enter]=sf::Mouse::isButtonPressed(sf::Mouse::Left);
 
 
 }
 
-Input::Input():WheelDelta(0) {
-}
 
 float Input::getWheelDelta() const {
     return WheelDelta;

@@ -9,16 +9,15 @@
 class Input {
 public:
 
-   enum keys  { W, A, S, D, MouseR, MouseL };
+   enum keys  { W, A, S, D, MouseR, MouseL, Enter};
 
 private:
 ///variables
 
     sf::Vector2f MousePos;//global position
-    bool KeyPressed[6];//6= num. of input keys mapped                                                                                         //6 = keys(enum) length
-    float WheelDelta;
+    bool KeyPressed[7];//7= num. of input keys mapped                                                                                         //6 = keys(enum) length
+    float WheelDelta=0;
 public:
-    Input();
 ///functions
 
             ///keys state output
