@@ -1,4 +1,4 @@
-#include "Button.h"
+#include "../headers/Button.h"
 
 void Button::setTexture(const sf::Texture& texture_) {
     sprite.setTexture(texture_);
