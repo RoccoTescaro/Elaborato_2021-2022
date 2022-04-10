@@ -11,7 +11,7 @@
 #else
 
 #define ERROR(string) { error(string); }
-#define DEBUG(string, ...) { debugLog(string, __VA_ARGS__);}
+#define DEBUG(string, ...) { debugLog(string, __VA_ARGS__); }
 
 void error(const char* string) {
 	std::cout << "[ERROR] " << string << std::endl;
