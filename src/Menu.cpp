@@ -8,17 +8,17 @@ start(sf::Vector2<float>(0,window_.getSize().y*0.125*4),sf::Vector2<int>(window_
 exit(sf::Vector2<float>(0,window_.getSize().y*0.125*6),sf::Vector2<int>(window_.getSize().x,window_.getSize().y*0.125))
 {
     //BACKGROUND
-    vignetteShader.loadFromFile("../shaders/vignette.frag",sf::Shader::Fragment);
+    vignetteShader.loadFromFile("shaders/vignette.frag",sf::Shader::Fragment);
     vignetteShader.setUniform("resolution",sf::Vector2f(window.getSize()));
     vignette.setSize(sf::Vector2f(window.getSize()));
 
-    texBackground.loadFromFile("../images/paperBackground.jpg");
+    texBackground.loadFromFile("images/paperBackground.jpg");
     background.setTexture(texBackground);
     background.setScale((float)window.getSize().x/texBackground.getSize().x,(float)window.getSize().x/texBackground.getSize().x);
 
     //FONTS
-    titleFont.loadFromFile("../fonts/titleFont2.ttf");
-    buttonFont.loadFromFile("../fonts/buttonFont1.ttf");
+    titleFont.loadFromFile("fonts/titleFont2.ttf");
+    buttonFont.loadFromFile("fonts/buttonFont1.ttf");
 
     //TITLE
     title.setFillColor(sf::Color(0,0,0,255));

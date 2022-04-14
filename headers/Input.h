@@ -15,7 +15,7 @@ private:
 ///variables
 
     sf::Vector2f MousePos;//global position
-    bool KeyPressed[7];//7= num. of input keys mapped                                                                                         //6 = keys(enum) length
+    bool KeyPressed[7]{};//7= num. of input keys mapped                                                                                         //6 = keys(enum) length
     float WheelDelta=0;
 public:
 ///functions

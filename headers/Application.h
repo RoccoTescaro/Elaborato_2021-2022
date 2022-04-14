@@ -12,7 +12,6 @@ public:
     void setState(State* state_);
 private:
     State* state{};
-    //Input input;
 };
 
 #endif //APPLICATION_H
