@@ -37,4 +37,6 @@ cmake-build-debug/
 .idea/
 CMakeLists.txt
 main.cpp
+headers/Input.h
+src/Input.cpp
 ################
