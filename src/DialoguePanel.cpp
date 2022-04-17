@@ -3,7 +3,7 @@
 DialoguePanel::DialoguePanel(const sf::IntRect& textBox_) {
     index = 0;
     charIndex = 0;
-    typingSpeed = 0.04f;
+    typingSpeed = 0.075f;
     timer = 0.f;
     textBox = textBox_;
     text.setPosition(textBox_.left, textBox_.top);
