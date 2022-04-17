@@ -3,11 +3,20 @@
 DialoguePanel::DialoguePanel(const sf::IntRect& textBox_) {
     index = 0;
     charIndex = 0;
-    typingSpeed = 0.0625f;
+    typingSpeed = 0.04f;
     timer = 0.f;
     textBox = textBox_;
     text.setPosition(textBox_.left, textBox_.top);
-
+    soundBuffer.emplace_back(sf::SoundBuffer{});
+    soundBuffer[0].loadFromFile("audios/typing1.wav");
+    soundBuffer.emplace_back(sf::SoundBuffer{});
+    soundBuffer[1].loadFromFile("audios/typing2.wav");
+    soundBuffer.emplace_back(sf::SoundBuffer{});
+    soundBuffer[2].loadFromFile("audios/typing3.wav");
+    soundBuffer.emplace_back(sf::SoundBuffer{});
+    soundBuffer[3].loadFromFile("audios/typing4.wav");
+    soundBuffer.emplace_back(sf::SoundBuffer{});
+    soundBuffer[4].loadFromFile("audios/typing5.wav");
 }
 
 
@@ -29,10 +38,6 @@ void DialoguePanel::setTextureDim(const sf::Vector2<float>& dim_) {
 
 void DialoguePanel::setText(const sf::Text& text_) {
     text = text_;
-}
-
-void DialoguePanel::setText(const std::string& string_) {
-    text.setString(string_);
 }
 
 void DialoguePanel::addText(const std::string& string_) {
@@ -76,7 +81,11 @@ void DialoguePanel::update(const float& dt) {
     timer += dt;
     if (timer > typingSpeed) {
         timer = 0.f;
-        if (charIndex < strings[index].size()) charIndex++;
+        if (charIndex < strings[index].size()) {
+            charIndex++;
+            sound.setBuffer(soundBuffer[rand()%soundBuffer.size()]);
+            sound.play();
+        }
     }
 
     text.setString(strings[index].substr(0, charIndex));

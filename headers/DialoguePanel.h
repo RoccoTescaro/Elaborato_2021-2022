@@ -1,6 +1,6 @@
 #ifndef DIALOGUEPANEL_H
 #define DIALOGUEPANEL_H
-
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
 class DialoguePanel {
@@ -17,8 +17,6 @@ public:
     void setTextureDim(const sf::Vector2<float>& dim_);
 
     void setText(const sf::Text& text_);
-
-    void setText(const std::string& string_);
 
     void addText(const std::string& string_);
 
@@ -61,6 +59,10 @@ private:
 
     sf::Text text;
 
+    //SOUND
+    std::vector<sf::SoundBuffer> soundBuffer;
+
+    sf::Sound sound;
 };
 
 #endif //DIALOGUEPANEL_H
