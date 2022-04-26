@@ -19,39 +19,13 @@ void Map::load(std::fstream& file) {
 			if(line.size() <= 0) break;
 			for (int i = 0; i < dim.x; ++i) {
 				if (i >= line.size()) break;
-				appendEntity(line[i],i,j);
+				appendEntity(i,j,line[i]);
 			}
 		}
 		file.close();
 	}
 	else
 		ERROR("loading - map file has not been open");
-}
-
-void Map::appendEntity(char type, int x, int y){
-	if (x < dim.x && x >= 0 && y < dim.y && y >= 0) {
-		switch (type) {
-		case entityType::wall: {
-			DEBUG("Wall allocated, key:{%}", posToIndex(x, y));
-			tiles.emplace(posToIndex(x, y), new Wall({ x,y }, cellDim));
-			break;
-		}
-		case entityType::hole: {
-			DEBUG("Hole allocated, key:{%}", posToIndex(x, y));
-			tiles.emplace(posToIndex(x, y), new Hole({ x,y }, cellDim));
-			break;
-		}
-		case entityType::empty: {
-			break;
-		}
-		default: {
-			ERROR("trying to istanciate an unknown type");
-			break;
-		}
-		}
-	}
-	else
-		ERROR("trying to allocate an Entity but non map has been loaded yet");
 }
 
 void Map::appendEntity(int x, int y, Entity* entity) {
@@ -153,3 +127,28 @@ const sf::Vector2<float>& Map::getCellDim() const{
 	return cellDim;
 }
 
+void Map::appendEntity(int x, int y, char type){ //cannot cast char to enum value but we can compare it.
+	if (x < dim.x && x >= 0 && y < dim.y && y >= 0) {
+		switch (type) {
+		case entityType::wall: {
+			DEBUG("Wall allocated, key:{%}", posToIndex(x, y));
+			tiles.emplace(posToIndex(x, y), new Wall({ x,y }, cellDim));
+			break;
+		}
+		case entityType::hole: {
+			DEBUG("Hole allocated, key:{%}", posToIndex(x, y));
+			tiles.emplace(posToIndex(x, y), new Hole({ x,y }, cellDim));
+			break;
+		}
+		case entityType::empty: {
+			break;
+		}
+		default: {
+			ERROR("trying to istanciate an unknown type");
+			break;
+		}
+		}
+	}
+	else
+		ERROR("trying to allocate an Entity but non map has been loaded yet");
+}

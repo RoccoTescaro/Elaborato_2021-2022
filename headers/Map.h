@@ -58,8 +58,6 @@ public:
 
 	void load(std::fstream& file);
 
-	void appendEntity(char type, int x, int y);
-
 	void appendEntity(int x, int y, Entity* entity);
 
 	void removeEntity(int x, int y);
@@ -84,6 +82,7 @@ public:
 	const sf::Vector2<float>& getCellDim() const;
 
 private:
+	void appendEntity(int x, int y, char type);
 
 	std::unordered_map<uint32_t, std::unique_ptr<Tile>> tiles;
 	std::unordered_map<uint32_t, std::unique_ptr<GameCharacter>> gameCharacters;
