@@ -16,7 +16,7 @@ bool Input::getKeyState(Input::keys key) {
 
 
 
-void Input::updateKeys( sf::RenderWindow &window) {
+void Input::updateInputStatus( sf::RenderWindow &window) {
 
     sf::Vector2i relativePos = sf::Mouse::getPosition(window);
 
@@ -30,7 +30,21 @@ void Input::updateKeys( sf::RenderWindow &window) {
     KeyPressed[Input::keys::MouseL]=sf::Mouse::isButtonPressed(sf::Mouse::Left);
     KeyPressed[Input::keys::Enter]=sf::Keyboard::isKeyPressed(sf::Keyboard::Enter);
 
-
+    while (window.pollEvent(event))
+    
+    switch (event.type)
+    {
+        case sf::Event::MouseWheelScrolled:
+            WheelDelta=event.mouseWheelScroll.delta;
+            break;
+        // window closed
+        case sf::Event::Closed:
+            window.close();
+            break;
+            
+        default:
+            break;
+    }
 }
 
 
@@ -38,13 +52,4 @@ float Input::getWheelDelta() const {
     return WheelDelta;
 }
 
-void Input::updateWheelDelta(sf::RenderWindow& window) {
-    sf::Event event;
-    while (window.pollEvent(event))
-    {
-        if (event.type == sf::Event::MouseWheelScrolled)
-            WheelDelta=event.mouseWheelScroll.delta;
-    }
-
-}
 
