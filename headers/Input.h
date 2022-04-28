@@ -13,7 +13,7 @@ public:
 
 private:
 ///variables
-
+    sf::Event event;
     sf::Vector2f MousePos;//global position
     bool KeyPressed[7];//7= num. of input keys mapped                                                                                         //6 = keys(enum) length
     float WheelDelta=0;
@@ -28,8 +28,7 @@ public:
     float getWheelDelta() const;
 
     ///keys state input
-    void updateKeys(sf::RenderWindow& window);
-    void updateWheelDelta(sf::RenderWindow& window);
+    void updateInputStatus(sf::RenderWindow& window);
 
 };
 
