@@ -7,6 +7,8 @@ public:
 	void render(sf::RenderWindow& window) {
 		window.draw(sprite);
 	}
-protected:
+	void update();
+	virtual void execute(Entity& e); 
+private:
 sf::Sprite sprite;
 };

@@ -6,7 +6,6 @@ private:
 public:
 	bool isSolid();
 
-	void setSolid(bool solid);
 /// TILE TYPES
 };
 

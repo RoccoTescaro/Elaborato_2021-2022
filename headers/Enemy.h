@@ -3,5 +3,6 @@
 class Enemy:public GameCharacter{
     private:
         int init;
+        bool flying;
         
 };
