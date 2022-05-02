@@ -1,3 +1,7 @@
+
+#ifndef UNTITLED_ENEMY_H
+#define UNTITLED_ENEMY_H
+
 #include "GameCharacter.h"
 
 class Enemy:public GameCharacter{
@@ -6,3 +10,6 @@ class Enemy:public GameCharacter{
         bool flying;
         
 };
+
+
+#endif //UNTITLED_ENEMY_H

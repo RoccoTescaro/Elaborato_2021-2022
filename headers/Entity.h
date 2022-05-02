@@ -1,8 +1,15 @@
 
+
+
+#ifndef UNTITLED_ENTITY_H
+#define UNTITLED_ENTITY_H
+
+
+
 #include <SFML/Graphics.hpp>
 class Entity {
 public:
-	Entity() {}
+	Entity(sf::Sprite& sprite) {}
 	virtual ~Entity() {}
 	void render(sf::RenderWindow& window) {
 		window.draw(sprite);
@@ -12,3 +19,6 @@ public:
 private:
 sf::Sprite sprite;
 };
+
+
+#endif //UNTITLED_ENTITY_H
