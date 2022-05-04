@@ -1,20 +1,20 @@
 
+//todo untitled
 
-
-#ifndef UNTITLED_ENTITY_H
-#define UNTITLED_ENTITY_H
+#ifndef ENTITY_H
+#define ENTITY_H
 
 
 
 #include <SFML/Graphics.hpp>
 class Entity {
 public:
-	Entity(sf::Sprite& sprite) {}
-	virtual ~Entity() {}
-	void render(sf::RenderWindow& window) {
+	Entity(sf::Texture& texture):sprite(texture) {}
+	virtual ~Entity()=0;
+	virtual void render(sf::RenderWindow& window) {
 		window.draw(sprite);
 	}
-	void update();
+	virtual void update(const float &deltaTime);
 	virtual void execute(Entity& e); 
 private:
 sf::Sprite sprite;
