@@ -6,7 +6,7 @@
 
 class Enemy:public GameCharacter{
     public:
-        Enemy(sf::Texture &texture,int maxActionPoints,int maxHP,int init,bool flying, sf::Vector2f skinPos):init(init+(rand()%20)), flying(flying), skinPos(skinPos),GameCharacter(texture, maxActionPoints, maxHP){}
+        Enemy(sf::Texture &texture,int maxAP,int maxHP,int init,bool flying, sf::Vector2f skinPos):init(init), flying(flying), skinPos(skinPos),GameCharacter(texture, maxAP, maxHP){}
     private:
         int init;
         bool flying;

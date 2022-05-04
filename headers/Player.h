@@ -1,16 +1,16 @@
 
 
-#ifndef UNTITLED_PLAYER_H
-#define UNTITLED_PLAYER_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include "GameCharacter.h"
 
 class Player:public GameCharacter{
     public:
-        Player(sf::Texture &texture, int maxActionPoints, int maxHP,int init,bool flying):AP(0),GameCharacter(texture, maxActionPoints, maxHP){}
+        Player(sf::Texture &texture, int maxAP, int maxHP):AP(0),GameCharacter(texture, maxAP, maxHP){}
     private:
         int AP;
 };
 
 
-#endif //UNTITLED_PLAYER_H
+#endif //PLAYER_H

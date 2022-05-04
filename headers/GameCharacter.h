@@ -2,19 +2,19 @@
 
 
 #include "Entity.h"
-#ifndef UNTITLED_GAMECHARACTER_H
-#define UNTITLED_GAMECHARACTER_H
+#ifndef GAMECHARACTER_H
+#define GAMECHARACTER_H
 
 
 
 class GameCharacter : public Entity {
 public:
-	GameCharacter (sf::Texture &texture, int maxActionPoints, int maxHP):maxActionPoints(maxActionPoints), maxHP(maxHP), HP(maxHP), Entity(texture) {}
+	GameCharacter (sf::Texture &texture, int maxAP, int maxHP):maxAP(maxAP), maxHP(maxHP), HP(maxHP), Entity(texture) {}
 	private:
 		const int maxHP;
 		int HP;
-		const int maxActionPoints;
+		const int maxAP;
 	};
 
 
-#endif //UNTITLED_GAMECHARACTER_H
+#endif //GAMECHARACTER_H
