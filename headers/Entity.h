@@ -21,4 +21,4 @@ sf::Sprite sprite;
 };
 
 
-#endif //UNTITLED_ENTITY_H
+#endif //ENTITY_H

@@ -7,7 +7,7 @@
 
 class Player:public GameCharacter{
     public:
-        Player(sf::Texture &texture, int maxAP, int maxHP):AP(0),GameCharacter(texture, maxAP, maxHP){}
+        Player(sf::Texture &texture, int maxAP, int maxHP):AP(0),GameCharacter(texture, maxAP, maxHP,GameCharacter::GCType::Player){}
     private:
         int AP;
 };
