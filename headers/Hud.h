@@ -15,11 +15,12 @@ public:
 
 private:
 
-	//INK BAR
-	sf::Texture inkBarTexture;
-	sf::Sprite inkBar;
-	sf::Shader barShader;
-	float ink = 0; //& (%)
+	//HEALTH BAR
+	sf::Texture healthBarTexture;
+	sf::Texture healthBarFilterTexture;
+	sf::Sprite healthBar;
+	sf::Shader healthBarShader;
+	float hp = 0.; 
 
 };
 
