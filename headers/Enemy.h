@@ -1,6 +1,6 @@
 
-#ifndef UNTITLED_ENEMY_H
-#define UNTITLED_ENEMY_H
+#ifndef ENEMY_H
+#define ENEMY_H
 
 #include "GameCharacter.h"
 
@@ -34,4 +34,4 @@ class Ranged:public Enemy{
 
 
 
-#endif //UNTITLED_ENEMY_H
+#endif //ENEMY_H
