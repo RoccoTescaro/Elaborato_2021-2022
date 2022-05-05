@@ -45,11 +45,11 @@ class  Pathfinding{
                                         if DIGLETT                      i diglet non usano il target come  
                                             dMovement                   casella di destinazione macome riferimento                    
                                             target = playerpos          per il calcolo della cella bersaglio
-                                            flaying = false
+                                            flying = false
                                         else
                                             aStar
                                             target = playerpos
-                                            flaying = false
+                                            flying = false
                                 */
 
     private:
