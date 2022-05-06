@@ -10,12 +10,12 @@
 class Entity {
 public:
 	Entity(sf::Texture& texture):sprite(texture) {}
-	virtual ~Entity()=0;
+	virtual ~Entity(){};
 	virtual void render(sf::RenderWindow& window) {
 		window.draw(sprite);
 	}
-	virtual void update(const float &deltaTime);
-	virtual void execute(Entity& e); 
+	virtual void update(const float &deltaTime)=0;
+	virtual void execute(Entity& e)=0; 
 private:
 sf::Sprite sprite;
 };

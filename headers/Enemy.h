@@ -6,6 +6,7 @@
 
 class Enemy:public GameCharacter{
     public:
+        bool canFly() override;
         Enemy(sf::Texture &texture,int maxAP,int maxHP,int init,bool flying,GCType gcType , sf::Vector2f skinPos):init(init), flying(flying), skinPos(skinPos),GameCharacter(texture, maxAP, maxHP,gcType){}
     private:
         int init;

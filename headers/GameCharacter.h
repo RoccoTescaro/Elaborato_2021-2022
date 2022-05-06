@@ -14,13 +14,15 @@ public:
 				Ranged ='R', 
 				Diglett ='D', 
 				Boss ='B'};
-				GCType getGCType();
-				GameCharacter (sf::Texture &texture, int maxAP, int maxHP,GCType gcType):maxAP(maxAP), maxHP(maxHP), HP(maxHP),gcType (gcType), Entity(texture) {}
-	private:
-		const int maxHP;
-		int HP;
-		const int maxAP;
-		const GCType gcType;
+	virtual ~GameCharacter(){};
+	GCType getGCType();
+	GameCharacter (sf::Texture &texture, int maxAP, int maxHP,GCType gcType):maxAP(maxAP), maxHP(maxHP), HP(maxHP),gcType (gcType), Entity(texture) {}
+	virtual bool canFly()=0;
+private:
+	const int maxHP;
+	int HP;
+	const int maxAP;
+	const GCType gcType;
 	};
 
 

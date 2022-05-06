@@ -7,6 +7,8 @@
 
 class Player:public GameCharacter{
     public:
+        bool canFly() override;
+        void foo();
         Player(sf::Texture &texture, int maxAP, int maxHP):AP(0),GameCharacter(texture, maxAP, maxHP,GameCharacter::GCType::Player){}
     private:
         int AP;
