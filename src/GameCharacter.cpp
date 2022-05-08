@@ -3,3 +3,4 @@
 GameCharacter::GCType GameCharacter::getGCType(){
      			 	return gcType;
 }
+
