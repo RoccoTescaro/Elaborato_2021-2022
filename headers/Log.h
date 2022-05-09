@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#ifndef DEBUG_MODE
+#ifndef _DEBUG
 
 #define ERROR(string)
 #define DEBUG(string, ...)
