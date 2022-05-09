@@ -3,7 +3,9 @@
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
 #include <fstream>
-
+#include "GameCharacter.h"
+#include "Tile.h"
+/*
 class Entity {
 public:
 	Entity(const sf::Vector2<float>& cellDim_) : cellDim(cellDim_) {}
@@ -18,14 +20,14 @@ public:
 protected:
 	const sf::Vector2<float>& cellDim; 
 	sf::RectangleShape sprite;
-};
+};*//*
 class Tile : public Entity {
 public:
 	Tile(sf::Vector2<int> pos, const sf::Vector2<float>& cellDim): Entity(cellDim) {
 		sprite.setPosition(pos.x * cellDim.x, pos.y * cellDim.y);
 		sprite.setSize(cellDim);
 	}	
-};
+};*//*
 class GameCharacter : public Entity {
 public:
 	GameCharacter(sf::Vector2<int> pos, const sf::Vector2<float>& cellDim) : Entity(cellDim) {
@@ -33,7 +35,7 @@ public:
 		sprite.setSize(cellDim);
 		sprite.setFillColor(sf::Color(0, 0, 255, 255));
 	}
-};
+};*//*
 class Wall : public Tile {
 public:
 	Wall(sf::Vector2<int> pos, const sf::Vector2<float>& cellDim) : Tile(pos, cellDim) {
@@ -45,7 +47,7 @@ public:
 	Hole(sf::Vector2<int> pos, const sf::Vector2<float>& cellDim) : Tile(pos, cellDim) {
 		sprite.setFillColor(sf::Color(0, 255, 0, 255));
 	}
-};
+};*/
 
 class Map {
 public:
@@ -82,7 +84,7 @@ public:
 	const sf::Vector2<float>& getCellDim() const;
 
 private:
-	void appendEntity(int x, int y, char type);
+	void appendEntity(int x, int y, char type, sf::Texture &texture);
 
 	std::unordered_map<uint32_t, std::unique_ptr<Tile>> tiles;
 	std::unordered_map<uint32_t, std::unique_ptr<GameCharacter>> gameCharacters;

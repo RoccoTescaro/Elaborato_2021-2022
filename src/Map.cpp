@@ -4,6 +4,12 @@
 #include <cmath>
 
 void Map::load(std::fstream& file) {
+	sf::Texture *t1;
+	t1=new(sf::Texture);
+	if (!(*t1).loadFromFile("../images/texture/Enemy.png"))
+        {
+                 // error...
+        }
 	if (file.is_open()) {
 		std::string firstLine;
 		std::getline(file, firstLine);
@@ -19,7 +25,8 @@ void Map::load(std::fstream& file) {
 			if(line.size() <= 0) break;
 			for (int i = 0; i < dim.x; ++i) {
 				if (i >= line.size()) break;
-				appendEntity(i,j,line[i]);
+
+				appendEntity(i,j,line[i],*t1);
 			}
 		}
 		file.close();
@@ -127,17 +134,17 @@ const sf::Vector2<float>& Map::getCellDim() const{
 	return cellDim;
 }
 
-void Map::appendEntity(int x, int y, char type){ //cannot cast char to enum value but we can compare it.
+void Map::appendEntity(int x, int y, char type,sf::Texture &texture){ //cannot cast char to enum value but we can compare it.
 	if (x < dim.x && x >= 0 && y < dim.y && y >= 0) {
 		switch (type) {
 		case entityType::wall: {
 			DEBUG("Wall allocated, key:{%}", posToIndex(x, y));
-			tiles.emplace(posToIndex(x, y), new Wall({ x,y }, cellDim));
+			tiles.emplace(posToIndex(x, y), new Wall({ x,y }, cellDim,texture));
 			break;
 		}
 		case entityType::hole: {
 			DEBUG("Hole allocated, key:{%}", posToIndex(x, y));
-			tiles.emplace(posToIndex(x, y), new Hole({ x,y }, cellDim));
+			tiles.emplace(posToIndex(x, y), new Hole({ x,y }, cellDim,texture));
 			break;
 		}
 		case entityType::empty: {
