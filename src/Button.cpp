@@ -20,6 +20,10 @@ std::string Button::getTextString() const {
     return text.getString();
 }
 
+sf::FloatRect Button::getTextBound() const {
+    return text.getGlobalBounds();
+}
+
 void Button::setFont(const sf::Font& font_) {
     text.setFont(font_);
 }
@@ -37,7 +41,8 @@ void Button::setTextColor(const sf::Color& color_) {
 }
 
 bool Button::isMouseOver(const sf::Vector2<float>& pos_) const {
-    return (pos.x<pos_.x && pos_.x<pos.x+dim.x)&&(pos.y<pos_.y && pos_.y<pos.x+dim.y);
+    sf::FloatRect bound{pos,sf::Vector2<float>(dim)};
+    return bound.contains(pos_);
 }
 
 void Button::setClicked(bool clicked_) {
@@ -61,6 +66,7 @@ bool Button::isActive() const {
 }
 
 void Button::render(sf::RenderWindow& window_, sf::Shader* shader) {
-    window_.draw(sprite, shader);
+    if(shader)window_.draw(sprite, shader);
+    else window_.draw(sprite);
     window_.draw(text);
 }

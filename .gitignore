@@ -37,12 +37,20 @@ cmake-build-debug/
 .idea/
 CMakeLists.txt
 main.cpp
+<<<<<<< HEAD
+=======
 .vs/
 Dependencies/
+>>>>>>> origin/Map
 Elaborato2020-2021.sln
 Elaborato2020-2021.vcxproj
 Elaborato2020-2021.vcxproj.filters
 Elaborato2020-2021.vcxproj.user
+<<<<<<< HEAD
+.vs/
+Dependencies/
+=======
+>>>>>>> origin/Map
 bin/
 x64/
 ################
