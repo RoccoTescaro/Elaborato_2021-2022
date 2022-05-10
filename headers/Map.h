@@ -3,56 +3,9 @@
 #include <SFML/Graphics.hpp>
 #include <fstream>
 #include <unordered_map>
-
-
-class Entity {
-public:
-	Entity(const sf::Vector2<float>& cellDim_) : cellDim(cellDim_) {}
-	virtual ~Entity() {}
-	void render(sf::RenderWindow& window) {
-		window.draw(sprite);
-	}
-
-	void move(const sf::Vector2<int>& pos) {
-		sprite.setPosition(pos.x * cellDim.x, pos.y * cellDim.y);
-	}
-
-	virtual std::string serialize() {}
-	virtual Entity* deserialize(const std::string& string_) {}
-
-protected:
-	const sf::Vector2<float>& cellDim;
-	sf::RectangleShape sprite;
-};
-
-
-class Tile : public Entity {
-public:
-	Tile(sf::Vector2<int> pos, const sf::Vector2<float>& cellDim) : Entity(cellDim) {
-		sprite.setPosition(pos.x * cellDim.x, pos.y * cellDim.y);
-		sprite.setSize(cellDim);
-	}
-};
-class GameCharacter : public Entity {
-public:
-	GameCharacter(sf::Vector2<int> pos, const sf::Vector2<float>& cellDim) : Entity(cellDim) {
-		sprite.setPosition(pos.x * cellDim.x, pos.y * cellDim.y);
-		sprite.setSize(cellDim);
-		sprite.setFillColor(sf::Color(0, 0, 255, 255));
-	}
-};
-class Wall : public Tile {
-public:
-	Wall(sf::Vector2<int> pos, const sf::Vector2<float>& cellDim) : Tile(pos, cellDim) {
-		sprite.setFillColor(sf::Color(255, 0, 0, 255));
-	}
-};
-class Hole : public Tile {
-public:
-	Hole(sf::Vector2<int> pos, const sf::Vector2<float>& cellDim) : Tile(pos, cellDim) {
-		sprite.setFillColor(sf::Color(0, 255, 0, 255));
-	}
-};
+#include "../headers/Entity.h"
+#include "../headers/Tile.h"
+#include "../headers/GameCharacter.h"
 
 class Map {
 public:
@@ -83,8 +36,8 @@ public:
 	uint32_t posToIndex(const sf::Vector2<float>& pos);
 	uint32_t posToIndex(const sf::Vector2<int>& pos);
 
-	void load(std::fstream& file); //#TODO
-	void save(std::fstream& file); //#TODO
+	void load(const std::string& filePath); 
+	void save(const std::string& filePath) const; 
 
 	void render(sf::RenderWindow& window);
 

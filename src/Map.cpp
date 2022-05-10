@@ -113,12 +113,32 @@ uint32_t  Map::posToIndex(const sf::Vector2<int>& pos) {
 	return static_cast<uint32_t>(pos.x) << 16 | static_cast<uint32_t>(pos.y);
 }
 
-void Map::load(std::fstream& file) {
+void Map::load(const std::string& filePath) {
+	std::fstream file;
+	file.open(filePath, std::fstream::in);
+	std::string line;
+	dim = { 0 , 0 };
 
+	while (std::getline(file, line))
+	{
+		uint32_t index = static_cast<uint32_t>(std::stoul(line.substr(0, line.find(" "))));
+		auto entity = (* Map::getRegister())[line.substr(line.find(" ") + 1, line.substr(line.find(" ")+1,line.size()).find(" ")).c_str()](line.substr(line.find(" ")+1,line.size()));
+		Map::appendEntity(index, entity);
+
+		auto pos = indexToPos(index); //setting up map dimension 
+		if (pos.x > dim.x) dim.x = pos.x;
+		if (pos.y > dim.y) dim.y = pos.y;
+	}
 }
 
-void Map::save(std::fstream& file) {
-
+void Map::save(const std::string& filePath) const {
+	std::fstream file;
+	file.open(filePath, std::fstream::out | std::fstream::trunc); //clear the txt file
+	for (auto i = gameCharacters.begin(); i != gameCharacters.end(); ++i)
+		file << i->first << " " << i->second->serialize() << std::endl;
+	for (auto i = tiles.begin(); i != tiles.end(); ++i)
+		file << i->first << " " << i->second->serialize() << std::endl;
+	file.close();
 }
 
 void Map::render(sf::RenderWindow& window) {
@@ -133,8 +153,8 @@ void Map::render(sf::RenderWindow& window) {
 }
 
 void Map::move(const sf::Vector2<int>& start, const sf::Vector2<int>& end) {
-	const auto& startCell = dynamic_cast<GameCharacter*>(Map::getEntity(start, Map::entityLayer::gameCharacterLayer));
-	const auto& endCell = dynamic_cast<GameCharacter*>(Map::getEntity(end, Map::entityLayer::gameCharacterLayer));
+	auto startCell = Map::getEntity(start, Map::entityLayer::gameCharacterLayer);
+	auto endCell = Map::getEntity(end, Map::entityLayer::gameCharacterLayer);
 
 	if (startCell && !endCell) {
 		auto entity = gameCharacters.extract(posToIndex(start));
