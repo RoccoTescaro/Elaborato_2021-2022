@@ -23,6 +23,8 @@ class PathAlgorithm{
             int f;
 
         };
+        int calculateHValue(Vector2i pos, Vector2i target);
+        bool isDestination(Vector2i pos,Vector2i target);
         bool isValid(Vector2i pos, bool flying);
         PathAlgorithm(Map &map): map(map){}
         virtual std::list<Vector2i> findPath(Vector2i start, Vector2i end, bool flying)=0;

@@ -1,11 +1,20 @@
 #include "../headers/Pathfinding.h"
 
 
+//todo tracePath
+
+
+int PathAlgorithm::calculateHValue(Vector2i pos, Vector2i target){
+return (abs(pos.x-target.x)+abs(pos.y-target.y));
+}
 
 bool PathAlgorithm::isValid(Vector2i pos, bool flying){
     return !(map(pos)->isSolid());
 };
 
+bool PathAlgorithm::isDestination(Vector2i pos,Vector2i target){
+    return (pos==target);
+}
 
 
 std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flying){
@@ -51,8 +60,125 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
         int gNew,hNew,fNew;
         //New node generation and exploration
         //---------TOP------------
-
-
+        if(isValid({i-1,j},flying)){
+            if(isDestination({i-1,j},target)){
+               
+                nodeInfo[i - 1][j].parentPos.x = i;
+                nodeInfo[i - 1][j].parentPos.y = j;
+                printf("The destination cell is found\n");
+                destFound = true; 
+                    //costruisci e rendi la listadi passi
+                //return tracePath(cellDetails, dest);;
+            }
+            else if(closedList[i-1][j]==false){
+                //calcolo f
+                gNew = nodeInfo[i][j].g + 1.0;
+                hNew = calculateHValue(sf::Vector2i({i-1,j}), target);
+                fNew = gNew + hNew;
+ 
+                if(nodeInfo[i-1][j].f==INT32_MAX||
+                   nodeInfo[i-1][j].f>fNew){
+                       openList.insert(std::make_pair(fNew,sf::Vector2i({i-1,j})));
+                       //update node info
+                        nodeInfo[i - 1][j].f = fNew;
+                        nodeInfo[i - 1][j].g = gNew;
+                        nodeInfo[i - 1][j].h = hNew;
+                        nodeInfo[i - 1][j].parentPos.x = i;
+                        nodeInfo[i - 1][j].parentPos.y = j;
+                   }
+            }
+        }
+        //---------BOTTOM------------
+        if(isValid({i+1,j},flying)){
+            if(isDestination({i+1,j},target)){
+               
+                nodeInfo[i + 1][j].parentPos.x = i;
+                nodeInfo[i + 1][j].parentPos.y = j;
+                printf("The destination cell is found\n");
+                destFound = true; 
+                    //costruisci e rendi la listadi passi
+                //return tracePath(cellDetails, dest);;
+            }
+            else if(closedList[i+1][j]==false){
+                //calcolo f
+                gNew = nodeInfo[i][j].g + 1.0;
+                hNew = calculateHValue(sf::Vector2i({i+1,j}), target);
+                fNew = gNew + hNew;
+ 
+                if(nodeInfo[i+1][j].f==INT32_MAX||
+                   nodeInfo[i+1][j].f>fNew){
+                       openList.insert(std::make_pair(fNew,sf::Vector2i({i+1,j})));
+                       //update node info
+                        nodeInfo[i + 1][j].f = fNew;
+                        nodeInfo[i + 1][j].g = gNew;
+                        nodeInfo[i + 1][j].h = hNew;
+                        nodeInfo[i + 1][j].parentPos.x = i;
+                        nodeInfo[i + 1][j].parentPos.y = j;
+                   }
+            }
+        }
+        //---------LEFT------------
+        if(isValid({i,j-1},flying)){
+            if(isDestination({i,j-1},target)){
+               
+                nodeInfo[i][j-1].parentPos.x = i;
+                nodeInfo[i][j-1].parentPos.y = j;
+                printf("The destination cell is found\n");
+                destFound = true; 
+                    //costruisci e rendi la listadi passi
+                //return tracePath(cellDetails, dest);;
+            }
+            else if(closedList[i][j-1]==false){
+                //calcolo f
+                gNew = nodeInfo[i][j].g + 1.0;
+                hNew = calculateHValue(sf::Vector2i({i,j-1}), target);
+                fNew = gNew + hNew;
+ 
+                if(nodeInfo[i][j-1].f==INT32_MAX||
+                   nodeInfo[i][j-1].f>fNew){
+                       openList.insert(std::make_pair(fNew,sf::Vector2i({i,j-1})));
+                       //update node info
+                        nodeInfo[i][j-1].f = fNew;
+                        nodeInfo[i][j-1].g = gNew;
+                        nodeInfo[i][j-1].h = hNew;
+                        nodeInfo[i][j-1].parentPos.x = i;
+                        nodeInfo[i][j-1].parentPos.y = j;
+                   }
+            }
+        }
+        //---------RIGHT------------
+        if(isValid({i,j+1},flying)){
+            if(isDestination({i,j+1},target)){
+               
+                nodeInfo[i][j+1].parentPos.x = i;
+                nodeInfo[i][j+1].parentPos.y = j;
+                printf("The destination cell is found\n");
+                destFound = true; 
+                    //costruisci e rendi la listadi passi
+                //return tracePath(cellDetails, dest);;
+            }
+            else if(closedList[i][j+1]==false){
+                //calcolo f
+                gNew = nodeInfo[i][j].g + 1.0;
+                hNew = calculateHValue(sf::Vector2i({i,j+1}), target);
+                fNew = gNew + hNew;
+ 
+                if(nodeInfo[i][j+1].f==INT32_MAX||
+                   nodeInfo[i][j+1].f>fNew){
+                       openList.insert(std::make_pair(fNew,sf::Vector2i({i,j+1})));
+                       //update node info
+                        nodeInfo[i][j+1].f = fNew;
+                        nodeInfo[i][j+1].g = gNew;
+                        nodeInfo[i][j+1].h = hNew;
+                        nodeInfo[i][j+1].parentPos.x = i;
+                        nodeInfo[i][j+1].parentPos.y = j;
+                   }
+            }
+        }
+        if (destFound==false){
+            std::list<Vector2i> emptyList;
+            return emptyList;
+        }
 
     }
 

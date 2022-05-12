@@ -2,7 +2,7 @@
 
 
 
-bool Entity::isSolid()
+bool Entity::isSolid(bool flying)
 	{
 		return this->solid;
 	}
