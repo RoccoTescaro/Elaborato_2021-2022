@@ -61,11 +61,11 @@ private:
 	const sf::Vector2<float> cellDim{ 48.f, 48.f }; //#TODO float or int?
 };
 
-
+/*
 template<typename T>
 void Map::registerType() {
 	getRegister()->insert(std::make_pair(typeid(T).name(),&T.deserialize)); //#TODO test T.deserialize
-}
+}*/
 
 
 

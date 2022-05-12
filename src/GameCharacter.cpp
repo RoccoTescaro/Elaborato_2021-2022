@@ -1,6 +1,2 @@
 #include "../headers/GameCharacter.h"
-
-GameCharacter::GCType GameCharacter::getGCType(){
-     			 	return gcType;
-}
-
+#include "../headers/Pathfinding.h"

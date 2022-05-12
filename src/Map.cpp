@@ -3,41 +3,8 @@
 #include "../headers/Log.h"
 #include <cmath>
 
-<<<<<<< HEAD
-void Map::load(std::fstream& file) {
-	sf::Texture *t1;
-	t1=new(sf::Texture);
-	if (!(*t1).loadFromFile("../images/texture/Enemy.png"))
-        {
-                 // error...
-        }
-	if (file.is_open()) {
-		std::string firstLine;
-		std::getline(file, firstLine);
-		auto space = firstLine.find(' ');
-		if (firstLine.size() <= 0 || space == std::string::npos) {
-			ERROR("loading - map file has a wrong format");
-			return;
-		}
-		dim = { stoi(firstLine.substr(0,space)), stoi(firstLine.substr(space+1,firstLine.size()))};
-		for (int j = 0; j < dim.y; ++j) {
-			std::string line;
-			std::getline(file, line);
-			if(line.size() <= 0) break;
-			for (int i = 0; i < dim.x; ++i) {
-				if (i >= line.size()) break;
-
-				appendEntity(i,j,line[i],*t1);
-			}
-		}
-		file.close();
-	}
-	else
-		ERROR("loading - map file has not been open");
-=======
 void Map::appendEntity(float x, float y, Entity* entity) {
 	appendEntity(posToIndex(x,y), entity);
->>>>>>> Map
 }
 
 void Map::appendEntity(int x, int y, Entity* entity) {
@@ -205,35 +172,8 @@ const sf::Vector2<float>& Map::getCellDim() const{
 	return cellDim;
 }
 
-<<<<<<< HEAD
-void Map::appendEntity(int x, int y, char type,sf::Texture &texture){ //cannot cast char to enum value but we can compare it.
-	if (x < dim.x && x >= 0 && y < dim.y && y >= 0) {
-		switch (type) {
-		case entityType::wall: {
-			DEBUG("Wall allocated, key:{%}", posToIndex(x, y));
-			tiles.emplace(posToIndex(x, y), new Wall({ x,y }, cellDim,texture));
-			break;
-		}
-		case entityType::hole: {
-			DEBUG("Hole allocated, key:{%}", posToIndex(x, y));
-			tiles.emplace(posToIndex(x, y), new Hole({ x,y }, cellDim,texture));
-			break;
-		}
-		case entityType::empty: {
-			break;
-		}
-		default: {
-			ERROR("trying to istanciate an unknown type");
-			break;
-		}
-		}
-	}
-	else
-		ERROR("trying to allocate an Entity but non map has been loaded yet");
-=======
 std::unordered_map<const char*, Entity* (*)(const std::string&)>* Map::getRegister() {
 	static std::unordered_map<const char*, Entity* (*)(const std::string&)>* registerType;
 	if (!registerType) registerType = new std::unordered_map<const char*, Entity* (*)(const std::string&)>;
 	return registerType;
->>>>>>> Map
 }
