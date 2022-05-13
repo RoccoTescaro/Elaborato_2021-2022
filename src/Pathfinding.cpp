@@ -16,6 +16,33 @@ bool PathAlgorithm::isDestination(Vector2i pos,Vector2i target){
     return (pos==target);
 }
 
+std::list<Vector2i> A_Star::tracePath(node *nodeInfo,int width,int height,Vector2i target){
+    
+    int row = target.x;
+    int col = target.y;
+ 
+    std::stack<Vector2i> Path;
+ 
+    while (!(nodeInfo[row*width+col].parentPos.x == row
+             && nodeInfo[row*width+col].parentPos.y == col)) {
+        Path.push({row,col});
+        int temp_row = nodeInfo[row*width+col].parentPos.x ;
+        int temp_col = nodeInfo[row*width+col].parentPos.y ;
+        row = temp_row;
+        col = temp_col;
+    }
+ 
+    Path.push({row,col});
+    std::list<Vector2i> finalPath;
+    while (!Path.empty()) {
+        Vector2i p = Path.top();
+        Path.pop();
+        finalPath.push_back(p);
+    }
+ 
+    return finalPath;
+}
+
 
 std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flying){
     // saving map info
@@ -68,7 +95,7 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
                 printf("The destination cell is found\n");
                 destFound = true; 
                     //costruisci e rendi la listadi passi
-                //return tracePath(cellDetails, dest);;
+                return tracePath(&nodeInfo[0][0], mapX,mapY,target);
             }
             else if(closedList[i-1][j]==false){
                 //calcolo f
@@ -97,7 +124,7 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
                 printf("The destination cell is found\n");
                 destFound = true; 
                     //costruisci e rendi la listadi passi
-                //return tracePath(cellDetails, dest);;
+                return tracePath(&nodeInfo[0][0], mapX,mapY,target);
             }
             else if(closedList[i+1][j]==false){
                 //calcolo f
@@ -126,7 +153,7 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
                 printf("The destination cell is found\n");
                 destFound = true; 
                     //costruisci e rendi la listadi passi
-                //return tracePath(cellDetails, dest);;
+                return tracePath(&nodeInfo[0][0], mapX,mapY,target);
             }
             else if(closedList[i][j-1]==false){
                 //calcolo f
@@ -155,7 +182,7 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
                 printf("The destination cell is found\n");
                 destFound = true; 
                     //costruisci e rendi la listadi passi
-                //return tracePath(cellDetails, dest);;
+                return tracePath(&nodeInfo[0][0], mapX,mapY,target);
             }
             else if(closedList[i][j+1]==false){
                 //calcolo f

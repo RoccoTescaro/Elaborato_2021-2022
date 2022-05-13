@@ -3,9 +3,9 @@
 #include <SFML/Graphics.hpp>
 #include <fstream>
 #include <unordered_map>
-#include "../headers/Entity.h"
-#include "../headers/Tile.h"
-#include "../headers/GameCharacter.h"
+#include "Entity.h"
+#include "Tile.h"
+#include "GameCharacter.h"
 
 class Map {
 public:

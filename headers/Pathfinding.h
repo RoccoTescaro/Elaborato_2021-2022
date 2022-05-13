@@ -9,6 +9,7 @@
 
 using namespace sf;
 
+
 typedef std::pair<int,Vector2i>Pair;
 
 
@@ -35,6 +36,7 @@ class PathAlgorithm{
 class A_Star:public PathAlgorithm{
     public:
         A_Star(Map &map): PathAlgorithm(map){}
+        std::list<Vector2i> tracePath(node *nodeinfo,int width,int height,Vector2i target);
         std::list<Vector2i> findPath(Vector2i start, Vector2i end, bool flying) override;
 };
 
