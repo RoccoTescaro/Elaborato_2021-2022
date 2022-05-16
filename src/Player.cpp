@@ -1,6 +1,6 @@
 #include "../headers/Player.h"
 #include "iostream"
 
-bool Player::canFly(){
-    return false;
-}
+//bool Player::canFly(){
+//    return false;
+//}

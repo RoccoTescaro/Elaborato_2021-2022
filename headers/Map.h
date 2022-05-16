@@ -11,6 +11,9 @@ class Map {
 public:
 	enum class entityLayer { tileLayer, gameCharacterLayer, any};
 
+	Map();
+	Map(const std::string& filePath);
+
 	void appendEntity(float x, float y, Entity* entity); // not really wanna use template but i could
 	void appendEntity(int x, int y, Entity* entity);
 	void appendEntity(const sf::Vector2<float>& pos, Entity* entity);
@@ -46,13 +49,12 @@ public:
 	const sf::Vector2<int>& getDim() const;
 	const sf::Vector2<float>& getCellDim() const;
 
-	template<typename T> static void registerType();
 private:
 	void appendEntity(uint32_t index, Entity* entity);
 	void removeEntity(uint32_t index, Map::entityLayer layer = entityLayer::any);
 	Entity* getEntity(uint32_t index, Map::entityLayer layer = entityLayer::any);
 	
-	static std::unordered_map<const char*, Entity* (*)(const std::string&)>* getRegister();
+	std::unordered_map<std::string, Entity* (*)(std::string)> registedType;
 
 	std::unordered_map<uint32_t, std::unique_ptr<Tile>> tiles;
 	std::unordered_map<uint32_t, std::unique_ptr<GameCharacter>> gameCharacters;
@@ -60,12 +62,6 @@ private:
 	sf::Vector2<int> dim;
 	const sf::Vector2<float> cellDim{ 48.f, 48.f }; //#TODO float or int?
 };
-
-
-template<typename T>
-void Map::registerType() {
-	getRegister()->insert(std::make_pair(typeid(T).name(),&T.deserialize)); //#TODO test T.deserialize
-}
 
 
 

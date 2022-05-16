@@ -3,6 +3,19 @@
 #include "../headers/Log.h"
 #include <cmath>
 
+#define DEFAULT_WIDTH 80
+#define DEFAULT_HEIGHT 40
+
+#define REGISTER(Type) std::make_pair(#Type, &Type::deserialize)
+
+Map::Map() {
+	registedType.insert(REGISTER(Wall));
+}
+
+Map::Map(const std::string& filePath) : Map(){
+	load(filePath);
+}
+
 void Map::appendEntity(float x, float y, Entity* entity) {
 	appendEntity(posToIndex(x,y), entity);
 }
@@ -21,12 +34,12 @@ void Map::appendEntity(const sf::Vector2<int>& pos, Entity* entity) {
 
 void Map::appendEntity(uint32_t index, Entity* entity) {
 	GameCharacter* character = dynamic_cast<GameCharacter*>(entity);
-	if (character) {
+	if (character && !getEntity(index, Map::entityLayer::gameCharacterLayer)) {
 		gameCharacters.emplace(index, character);
 		DEBUG("GameCharacter allocated, key:{%}", index);
 	}
 	Tile* tile = dynamic_cast<Tile*>(entity);
-	if (tile) {
+	if (tile && !getEntity(index,Map::entityLayer::tileLayer)) {
 		tiles.emplace(index, tile);
 		DEBUG("Tile allocated, key:{%}", index);
 	}
@@ -117,13 +130,22 @@ void Map::load(const std::string& filePath) {
 	std::fstream file;
 	file.open(filePath, std::fstream::in);
 	std::string line;
-	dim = { 0 , 0 };
+	dim = { DEFAULT_WIDTH , DEFAULT_HEIGHT };
 
 	while (std::getline(file, line))
 	{
-		uint32_t index = static_cast<uint32_t>(std::stoul(line.substr(0, line.find(" "))));
-		auto entity = (* Map::getRegister())[line.substr(line.find(" ") + 1, line.substr(line.find(" ")+1,line.size()).find(" ")).c_str()](line.substr(line.find(" ")+1,line.size()));
-		Map::appendEntity(index, entity);
+		std::string string = line;
+		uint32_t index = static_cast<uint32_t>(std::stoul(string.substr(0, string.find(" "))));
+		string.erase(0, string.find(" ") + 1);
+		std::string type = string.substr(0, string.find(" "));
+		string.erase(0, string.find(" ") + 1);
+		auto deserialize = registedType[type];
+		if (deserialize) {
+			Entity* entity = deserialize(string);
+			Map::appendEntity(index, entity);
+		}
+		else
+			DEBUG("Error trying to deserialize entity. Probably loading txt file has been corrupted.");
 
 		auto pos = indexToPos(index); //setting up map dimension 
 		if (pos.x > dim.x) dim.x = pos.x;
@@ -132,8 +154,11 @@ void Map::load(const std::string& filePath) {
 }
 
 void Map::save(const std::string& filePath) const {
+	DEBUG("Saving...");
 	std::fstream file;
 	file.open(filePath, std::fstream::out | std::fstream::trunc); //clear the txt file
+	if (!file.is_open())
+		ERROR("Can't open map file");
 	for (auto i = gameCharacters.begin(); i != gameCharacters.end(); ++i)
 		file << i->first << " " << i->second->serialize() << std::endl;
 	for (auto i = tiles.begin(); i != tiles.end(); ++i)
@@ -172,8 +197,3 @@ const sf::Vector2<float>& Map::getCellDim() const{
 	return cellDim;
 }
 
-std::unordered_map<const char*, Entity* (*)(const std::string&)>* Map::getRegister() {
-	static std::unordered_map<const char*, Entity* (*)(const std::string&)>* registerType;
-	if (!registerType) registerType = new std::unordered_map<const char*, Entity* (*)(const std::string&)>;
-	return registerType;
-}

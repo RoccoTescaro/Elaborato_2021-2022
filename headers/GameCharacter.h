@@ -9,14 +9,14 @@
 
 class GameCharacter : public Entity {
 public:
-	enum GCType{Player ='P',
+	enum class GCType{Player ='P',
 				Melee ='M',
 				Ranged ='R', 
 				Diglett ='D', 
 				Boss ='B'};
 	virtual ~GameCharacter(){};
 	GCType getGCType();
-	GameCharacter (sf::Texture &texture, int maxAP, int maxHP,GCType gcType,sf::Vector2<int> pos):maxAP(maxAP), maxHP(maxHP), HP(maxHP),gcType (gcType), Entity(texture,{80,20}) {
+	GameCharacter (const sf::Color& color, int maxAP, int maxHP,GCType gcType,sf::Vector2<int> pos):maxAP(maxAP), maxHP(maxHP), HP(maxHP),gcType (gcType), Entity(color,{80,20}) {
 		sprite.setPosition(pos.x * cellDim.x, pos.y * cellDim.y);
 		sprite.setSize(cellDim);
 		sprite.setFillColor(sf::Color(0, 0, 255, 255));
