@@ -9,7 +9,14 @@
 #define REGISTER(Type) std::make_pair(#Type, &Type::deserialize)
 
 Map::Map() {
+	//TILES
 	registedType.insert(REGISTER(Wall));
+	registedType.insert(REGISTER(Hole));
+	//GAMECHARACTERS
+	registedType.insert(REGISTER(Melee));
+	registedType.insert(REGISTER(Bat));
+	registedType.insert(REGISTER(Ranged));
+	registedType.insert(REGISTER(Player));
 }
 
 Map::Map(const std::string& filePath) : Map(){
@@ -34,12 +41,12 @@ void Map::appendEntity(const sf::Vector2<int>& pos, Entity* entity) {
 
 void Map::appendEntity(uint32_t index, Entity* entity) {
 	GameCharacter* character = dynamic_cast<GameCharacter*>(entity);
-	if (character && !getEntity(index, Map::entityLayer::gameCharacterLayer)) {
+	if (character && !Map::isOccupied(index, entity)) {
 		gameCharacters.emplace(index, character);
 		DEBUG("GameCharacter allocated, key:{%}", index);
 	}
 	Tile* tile = dynamic_cast<Tile*>(entity);
-	if (tile && !getEntity(index,Map::entityLayer::tileLayer)) {
+	if (tile && !Map::isOccupied(index, entity)) {
 		tiles.emplace(index, tile);
 		DEBUG("Tile allocated, key:{%}", index);
 	}
@@ -66,39 +73,39 @@ void Map::removeEntity(uint32_t index, Map::entityLayer layer) {
 	if ((layer == Map::entityLayer::tileLayer || layer == Map::entityLayer::any) && tiles.erase(index)) DEBUG("Tile removed, key:{%}", index);
 }
 
-Entity* Map::operator()(float x, float y, Map::entityLayer layer) {
+Entity* Map::operator()(float x, float y, Map::entityLayer layer) const {
 	return Map::getEntity(posToIndex(x, y), layer);
 }
 
-Entity* Map::operator()(int x, int y, Map::entityLayer layer) {
+Entity* Map::operator()(int x, int y, Map::entityLayer layer) const {
 	return Map::getEntity(posToIndex(x, y), layer);
 }
 
-Entity* Map::operator()(const sf::Vector2<float>& pos, Map::entityLayer layer) {
+Entity* Map::operator()(const sf::Vector2<float>& pos, Map::entityLayer layer) const {
 	return Map::getEntity(posToIndex(pos), layer);
 }
 
-Entity* Map::operator()(const sf::Vector2<int>& pos, Map::entityLayer layer) {
+Entity* Map::operator()(const sf::Vector2<int>& pos, Map::entityLayer layer) const {
 	return Map::getEntity(posToIndex(pos), layer);
 }
 
-Entity* Map::getEntity(float x, float y, Map::entityLayer layer) {
+Entity* Map::getEntity(float x, float y, Map::entityLayer layer) const {
 	return Map::getEntity(posToIndex(x, y), layer);
 }
 
-Entity* Map::getEntity(int x, int y, Map::entityLayer layer) {
+Entity* Map::getEntity(int x, int y, Map::entityLayer layer) const {
 	return Map::getEntity(posToIndex(x, y), layer);
 }
 
-Entity* Map::getEntity(const sf::Vector2<float>& pos, Map::entityLayer layer) {
+Entity* Map::getEntity(const sf::Vector2<float>& pos, Map::entityLayer layer) const {
 	return Map::getEntity(posToIndex(pos), layer);
 }
 
-Entity* Map::getEntity(const sf::Vector2<int>& pos, Map::entityLayer layer) {
+Entity* Map::getEntity(const sf::Vector2<int>& pos, Map::entityLayer layer) const {
 	return Map::getEntity(posToIndex(pos), layer);
 }
 
-Entity* Map::getEntity(uint32_t index, Map::entityLayer layer) {
+Entity* Map::getEntity(uint32_t index, Map::entityLayer layer) const {
 	auto character = gameCharacters.find(index);
 	if (character != gameCharacters.end() && (layer == Map::entityLayer::any || layer == Map::entityLayer::gameCharacterLayer)) return character->second.get();
 	auto tile = tiles.find(index);
@@ -106,23 +113,23 @@ Entity* Map::getEntity(uint32_t index, Map::entityLayer layer) {
 	return nullptr;
 }
 
-sf::Vector2<int> Map::indexToPos(uint32_t index) {
+sf::Vector2<int> Map::indexToPos(uint32_t index) const {
 	return sf::Vector2<int>(std::min<int>(std::max<int>(index >> 16, 0), dim.x - 1), std::min<int>(std::max<int>(index & 0x0000FFFFU, 0), dim.y - 1));
 }
 
-uint32_t  Map::posToIndex(float x, float y) {
+uint32_t  Map::posToIndex(float x, float y) const {
 	return static_cast<uint32_t>(int(x / cellDim.x)) << 16 | static_cast<uint32_t>((int)y / cellDim.y);
 }
 
-uint32_t  Map::posToIndex(int x, int y) {
+uint32_t  Map::posToIndex(int x, int y) const {
 	return static_cast<uint32_t>(x) << 16 | static_cast<uint32_t>(y);
 }
 
-uint32_t  Map::posToIndex(const sf::Vector2<float>& pos) {
+uint32_t  Map::posToIndex(const sf::Vector2<float>& pos) const {
 	return static_cast<uint32_t>(pos.x / cellDim.x) << 16 | static_cast<uint32_t>(pos.y / cellDim.y);
 }
 
-uint32_t  Map::posToIndex(const sf::Vector2<int>& pos) {
+uint32_t  Map::posToIndex(const sf::Vector2<int>& pos) const {
 	return static_cast<uint32_t>(pos.x) << 16 | static_cast<uint32_t>(pos.y);
 }
 
@@ -185,8 +192,47 @@ void Map::move(const sf::Vector2<int>& start, const sf::Vector2<int>& end) {
 		auto entity = gameCharacters.extract(posToIndex(start));
 		entity.key() = posToIndex(end);
 		gameCharacters.insert(std::move(entity));
-		Map::getEntity(end,Map::entityLayer::gameCharacterLayer)->move(end);
+		Map::getEntity(end,Map::entityLayer::gameCharacterLayer)->move(static_cast<sf::Vector2<float>>(end));
 	}
+}
+
+bool  Map::isOccupied(float x, float y, Entity* entity) const {
+	return Map::isOccupied(posToIndex(x, y), entity);
+}
+
+bool  Map::isOccupied(int x, int y, Entity* entity) const {
+	return Map::isOccupied(posToIndex(x, y), entity);
+}
+
+bool  Map::isOccupied(const sf::Vector2<float>& pos, Entity* entity) const {
+	return Map::isOccupied(posToIndex(pos), entity);
+}
+
+bool  Map::isOccupied(const sf::Vector2<int>& pos, Entity* entity) const {
+	return Map::isOccupied(posToIndex(pos), entity);
+}
+
+bool Map::isOccupied(uint32_t index, Entity* entity) const {
+
+	auto clientGameCharacter = dynamic_cast<GameCharacter*>(entity);
+	auto clientTile = dynamic_cast<Tile*>(entity);
+	auto gameCharacter = Map::getEntity(index, Map::entityLayer::gameCharacterLayer);
+	auto tile = Map::getEntity(index, Map::entityLayer::tileLayer);
+
+	if (clientGameCharacter) 
+	{
+		if (gameCharacter) return true;
+		else if (tile) return clientGameCharacter->isSolid() || tile->isSolid();
+		else return false;
+	}
+	if(clientTile)
+	{
+		if (tile) return true;
+		else if (gameCharacter) return clientTile->isSolid() || gameCharacter->isSolid();
+		else return false;
+	}
+
+	return false;
 }
 
 const sf::Vector2<int>& Map::getDim() const {

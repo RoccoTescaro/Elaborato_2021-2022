@@ -1,33 +1,28 @@
-
-//todo untitled
-
 #ifndef ENTITY_H
 #define ENTITY_H
 
-
-
 #include <SFML/Graphics.hpp>
-#include <iostream>
+
 class Entity {
 public:
-	Entity(const sf::Color color, const sf::Vector2<float>& cellDim_) : cellDim(cellDim_) { sprite.setFillColor(color); }
-	virtual ~Entity(){};
-	virtual void render(sf::RenderWindow& window) {
-		window.draw(sprite);
-	}
-	virtual void update(const float &deltaTime)=0;
-	virtual void execute(Entity& e)=0; 
-	void move(const sf::Vector2<int>& pos) {
-		sprite.setPosition(pos.x*cellDim.x,pos.y*cellDim.y);
-	}
+	Entity(const sf::Vector2<float>& pos, const sf::Vector2<float>& size);
+	virtual ~Entity() = default;
 
-	virtual std::string serialize() { 
-		std::cout << typeid(*this).name() << std::endl;
-		return ""; };
+	virtual void render(sf::RenderWindow& window);
+	virtual void update(const float& dt) = 0;
+	virtual void execute(Entity* entity) = 0;
+
+	void move(const sf::Vector2<float>& pos); //#TODO implements animations
+	
+	virtual std::string serialize() const = 0;
+	//can't be virtual (couse must be static), but each leaf must implement it
+	//static Entity* deserialize(std::string line); 
+
+	virtual bool isSolid() const = 0;
 protected:
-	sf::Sprite Rsprite;
-	const sf::Vector2<float>& cellDim; 
-	sf::RectangleShape sprite;
+	static void parseString(std::vector<std::string>& parameters, std::string& line);
+
+	sf::RectangleShape testingSprite;
 };
 
 
