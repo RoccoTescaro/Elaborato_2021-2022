@@ -7,7 +7,7 @@
 class Enemy:public GameCharacter{
     public:
         bool canFly() override;
-        Enemy(PathAlgorithm &movementStrategy,sf::Texture &texture,int maxAP,int maxHP,int init,bool flying, sf::Vector2f skinPos, sf::Vector2<int> spawnPos):init(init), flying(flying), skinPos(skinPos),GameCharacter(movementStrategy,texture, maxAP, maxHP,spawnPos){}
+        Enemy(const sf::Color& color,PathAlgorithm &movementStrategy,int maxAP,int maxHP,int init,bool flying, sf::Vector2f skinPos, sf::Vector2<int> spawnPos):init(init), flying(flying), skinPos(skinPos),GameCharacter(color,movementStrategy, maxAP, maxHP,spawnPos){}
     private:
         int init;
         bool flying;
@@ -22,7 +22,7 @@ class Melee:public Enemy{
 	void update(const float &deltaTime) override{};
 	void execute(Entity& e) override {}; 
 
-        Melee(PathAlgorithm &movementStrategy,sf::Texture &texture,int maxAP,int maxHP,int init,bool flying, sf::Vector2<int> spawnPos):Enemy(movementStrategy,texture, maxAP, 10/*HP*/,0/*init*/,false ,{1,1},spawnPos){}//INSERIRE SKINPOS
+        Melee(const sf::Color& color,PathAlgorithm &movementStrategy,int maxAP,int maxHP,int init,bool flying, sf::Vector2<int> spawnPos):Enemy(color,movementStrategy, maxAP, 10/*HP*/,0/*init*/,false ,{1,1},spawnPos){}//INSERIRE SKINPOS
     };
 
 
@@ -32,7 +32,7 @@ class Bat:public Enemy{
 	void update(const float &deltaTime) override{};
 	void execute(Entity& e) override {}; 
 
-        Bat(PathAlgorithm &movementStrategy,sf::Texture &texture,int maxAP,int maxHP,int init,bool flying, sf::Vector2<int> spawnPos):Enemy(movementStrategy,texture, maxAP, 8/*HP*/,5/*init*/,true,{1,1},spawnPos){}//INSERIRE SKINPOS
+        Bat(const sf::Color& color,PathAlgorithm &movementStrategy,int maxAP,int maxHP,int init,bool flying, sf::Vector2<int> spawnPos):Enemy(color,movementStrategy, maxAP, 8/*HP*/,5/*init*/,true,{1,1},spawnPos){}//INSERIRE SKINPOS
     };
 
 
@@ -42,7 +42,7 @@ class Ranged:public Enemy{
 	void update(const float &deltaTime) override{};
 	void execute(Entity& e) override {}; 
 
-        Ranged(PathAlgorithm &movementStrategy,sf::Texture &texture,int maxAP,int maxHP,int init,bool flying, sf::Vector2<int> spawnPos):Enemy(movementStrategy,texture, maxAP, 5/*HP*/,3/*init*/ ,false,{1,1},spawnPos){}//INSERIRE SKINPOS
+        Ranged(const sf::Color& color,PathAlgorithm &movementStrategy,int maxAP,int maxHP,int init,bool flying, sf::Vector2<int> spawnPos):Enemy(color,movementStrategy, maxAP, 5/*HP*/,3/*init*/ ,false,{1,1},spawnPos){}//INSERIRE SKINPOS
     };
 
 

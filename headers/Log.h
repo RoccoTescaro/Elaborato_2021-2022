@@ -13,11 +13,11 @@
 #define ERROR(string) { error(string); }
 #define DEBUG(string, ...) { debugLog(string, __VA_ARGS__); }
 
-void error(const char* string) {
+static void error(const char* string) {
 	std::cout << "[ERROR] " << string << std::endl;
 }
 
-void debug(const char* string) {
+static void debug(const char* string) {
     std::cout << string << std::endl;
 }
 
@@ -43,9 +43,6 @@ void debugLog(const char* string, Args... args) {
     std::cout << "[DEBUG] ";
     debug(string, args...);
 }
-
-
-
 
 #endif
 

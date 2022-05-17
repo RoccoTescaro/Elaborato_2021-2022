@@ -7,9 +7,10 @@
 
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 class Entity {
 public:
-	Entity(sf::Vector2<int> pos,sf::Texture& texture,const sf::Vector2<float>& cellDim_, bool solid):Rsprite(texture),cellDim(cellDim_), solid(solid) {}
+	Entity(const sf::Color color,sf::Vector2<int> pos,const sf::Vector2<float>& cellDim_, bool solid):cellDim(cellDim_), solid(solid) {sprite.setFillColor(color);}
 	virtual ~Entity(){};
 	virtual void render(sf::RenderWindow& window) {
 		window.draw(sprite);
@@ -20,10 +21,13 @@ public:
 		sprite.setPosition(pos.x*cellDim.x,pos.y*cellDim.y);
 	}
 	virtual bool isSolid(bool flying=false);
+
+	virtual std::string serialize() { 
+		std::cout << typeid(*this).name() << std::endl;
+		return ""; };
 protected:
 	bool solid;
 	sf::Vector2<int> pos;
-	sf::Sprite Rsprite;
 	const sf::Vector2<float>& cellDim; 
 	sf::RectangleShape sprite;
 };

@@ -13,7 +13,7 @@ class Player:public GameCharacter{
 
         bool canFly() override;
         void foo();
-        Player(PathAlgorithm &movementStrategy,sf::Texture &texture, int maxAP, int maxHP, sf::Vector2<int> spawnPos):AP(0),GameCharacter(movementStrategy,texture, maxAP, maxHP, spawnPos/*spawn pos*/){}
+        Player(const sf::Color& color,PathAlgorithm &movementStrategy, int maxAP, int maxHP, sf::Vector2<int> spawnPos):AP(0),GameCharacter(color,movementStrategy, maxAP, maxHP, spawnPos/*spawn pos*/){}
     private:
         int AP;
 };
