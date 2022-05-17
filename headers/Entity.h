@@ -18,8 +18,10 @@ public:
 	//can't be virtual (couse must be static), but each leaf must implement it
 	//static Entity* deserialize(std::string line); 
 
-	virtual bool isSolid() const = 0; 
+	virtual bool isSolid() const = 0;
 protected:
+	static void parseString(std::vector<std::string>& parameters, std::string& line);
+
 	sf::RectangleShape testingSprite;
 };
 

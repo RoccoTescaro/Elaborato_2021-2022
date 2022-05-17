@@ -16,13 +16,7 @@ std::string Wall::serialize() const {
 
 Entity* Wall::deserialize(std::string line) {
 	std::vector<std::string> parameters;
-	line = line.substr(line.find("{")+1, line.size());
-
-	size_t pos;
-	while (pos = line.find(",") < line.find("}")) {
-		parameters.push_back(line.substr(0, pos));
-		line.erase(0, pos + 1);
-	}
+	parseString(parameters, line);
 	
 	float posX = std::stof(parameters[0]);
 	float posY = std::stof(parameters[1]);
@@ -51,13 +45,7 @@ std::string Hole::serialize() const {
 
 Entity* Hole::deserialize(std::string line) {
 	std::vector<std::string> parameters;
-	line = line.substr(line.find("{") + 1, line.size());
-
-	size_t pos;
-	while (pos = line.find(",") < line.find("}")) {
-		parameters.push_back(line.substr(0, pos));
-		line.erase(0, pos + 1);
-	}
+	parseString(parameters, line);
 
 	float posX = std::stof(parameters[0]);
 	float posY = std::stof(parameters[1]);
