@@ -1,21 +1,19 @@
-
-
 #ifndef PLAYER_H
 #define PLAYER_H
 
 #include "GameCharacter.h"
 
-class Player:public GameCharacter{
-    public:
+class Player : public GameCharacter{
+public:
+    Player(const sf::Vector2<float>& pos, const sf::Vector2<float>& size);
 
-	    void update(const float &deltaTime) override{};
-    	void execute(Entity& e) override {}; 
+    void update(const float& dt) override {}; //#TODO
+    void execute(Entity* entity) override {}; //#TODO
 
-        bool canFly() override;
-        void foo();
-        Player(sf::Texture &texture, int maxAP, int maxHP, sf::Vector2<int> spawnPos):AP(0),GameCharacter(texture, maxAP, maxHP,GameCharacter::GCType::Player, spawnPos/*spawn pos*/){}
-    private:
-        int AP;
+    std::string serialize() const override;
+    static Entity* deserialize(std::string line);
+
+    bool isSolid() const override;
 };
 
 

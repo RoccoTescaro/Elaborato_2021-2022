@@ -1,34 +1,46 @@
+#ifndef TILES_H
+#define TILES_H
+
 #include "Entity.h"
+#include <string>
 
 class Tile : public Entity {
-private:
-	bool solid;
 public:
+	Tile(const sf::Vector2<float>& pos, const sf::Vector2<float>& size) : Entity(pos, size) {};
 
-	Tile(sf::Vector2<int> pos, const sf::Vector2<float>& cellDim,sf::Texture &texture, bool solid): Entity(texture,cellDim), solid(solid) {
-		sprite.setPosition(pos.x * cellDim.x, pos.y * cellDim.y);
-		sprite.setSize(cellDim);
-	}	
-	bool isSolid();
+protected:
 
-/// TILE TYPES
 };
 
 
-class Wall : public Tile {public:
-	Wall(sf::Vector2<int> pos, const sf::Vector2<float>& cellDim, sf::Texture &texture) : Tile(pos, cellDim,texture,true) {
-		sprite.setFillColor(sf::Color(255,0,0,255));
-	}
-	void update(const float &deltaTime) override{};
-	void execute(Entity& e) override {}; 
+class Wall : public Tile {
+public:
+	Wall(const sf::Vector2<float>& pos, const sf::Vector2<float>& size);
+
+	void update(const float& dt) override {}; //#TODO
+	void execute(Entity* entity) override {}; //#TODO
+
+	std::string serialize() const override;
+	static Entity* deserialize(std::string line);
+
+	bool isSolid() const override;
+private:
+
 };
+
 class Hole : public Tile {
-	public:
-	Hole(sf::Vector2<int> pos, const sf::Vector2<float>& cellDim, sf::Texture &texture) : Tile(pos, cellDim, texture, true) {
-		sprite.setFillColor(sf::Color(0, 255, 0, 255));
-	}
+public:
+	Hole(const sf::Vector2<float>& pos, const sf::Vector2<float>& size);
 
-	void update(const float &deltaTime) override{};
-	void execute(Entity& e) override {}; 
+	void update(const float& dt) override {}; //#TODO
+	void execute(Entity* entity) override {}; //#TODO
+
+	std::string serialize() const override;
+	static Entity* deserialize(std::string line);
+
+	bool isSolid() const override;
+private:
 
 };
+
+#endif //TILES_H

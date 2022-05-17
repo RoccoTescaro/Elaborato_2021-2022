@@ -1,6 +1,6 @@
-#include "../headers/GameCharacter.h"
-
-GameCharacter::GCType GameCharacter::getGCType(){
-     			 	return gcType;
-}
-
+//#include "../headers/GameCharacter.h"
+//
+//GameCharacter::GCType GameCharacter::getGCType(){
+//     			 	return gcType;
+//}
+//

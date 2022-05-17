@@ -1,50 +1,63 @@
-
 #ifndef ENEMY_H
 #define ENEMY_H
 
 #include "GameCharacter.h"
 
-class Enemy:public GameCharacter{
-    public:
-        bool canFly() override;
-        Enemy(sf::Texture &texture,int maxAP,int maxHP,int init,bool flying,GCType gcType , sf::Vector2f skinPos, sf::Vector2<int> spawnPos):init(init), flying(flying), skinPos(skinPos),GameCharacter(texture, maxAP, maxHP,gcType,spawnPos){}
-    private:
-        int init;
-        bool flying;
-        sf::Vector2f skinPos;
+class Enemy : public GameCharacter {
+public:
+    Enemy(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, uint8_t maxHealthPoints, uint8_t maxActionPoints, uint8_t initiative) : 
+        GameCharacter(pos, size, maxHealthPoints, maxActionPoints), initiative(initiative) {}
         
+    uint8_t getInitiative() const;
+protected:
+    uint8_t initiative;        
 };
 
 
-class Melee:public Enemy{
-    public:
+class Melee : public Enemy {
+public:
+    Melee(const sf::Vector2<float>& pos, const sf::Vector2<float>& size);
 
-	void update(const float &deltaTime) override{};
-	void execute(Entity& e) override {}; 
+	void update(const float& dt) override {}; //#TODO
+	void execute(Entity* entity) override {}; //#TODO
 
-        Melee(sf::Texture &texture,int maxAP,int maxHP,int init,bool flying, sf::Vector2<int> spawnPos):Enemy(texture, maxAP, 10/*HP*/,0/*init*/,false,GameCharacter::GCType::Melee ,{1,1},spawnPos){}//INSERIRE SKINPOS
-    };
+    std::string serialize() const override;
+    static Entity* deserialize(std::string line);
 
+    bool isSolid() const override;
+private:
 
-class Bat:public Enemy{
-    public:
-
-	void update(const float &deltaTime) override{};
-	void execute(Entity& e) override {}; 
-
-        Bat(sf::Texture &texture,int maxAP,int maxHP,int init,bool flying, sf::Vector2<int> spawnPos):Enemy(texture, maxAP, 8/*HP*/,5/*init*/,true,GameCharacter::GCType::Ranged ,{1,1},spawnPos){}//INSERIRE SKINPOS
-    };
+};
 
 
-class Ranged:public Enemy{
-    public:
+class Bat : public Enemy {
+public:
+    Bat(const sf::Vector2<float>& pos, const sf::Vector2<float>& size);
 
-	void update(const float &deltaTime) override{};
-	void execute(Entity& e) override {}; 
+    void update(const float& dt) override {}; //#TODO
+    void execute(Entity* entity) override {}; //#TODO
 
-        Ranged(sf::Texture &texture,int maxAP,int maxHP,int init,bool flying, sf::Vector2<int> spawnPos):Enemy(texture, maxAP, 5/*HP*/,3/*init*/ ,false,GameCharacter::GCType::Diglett,{1,1},spawnPos){}//INSERIRE SKINPOS
-    };
+    std::string serialize() const override;
+    static Entity* deserialize(std::string line);
 
+    bool isSolid() const override;
+private:
 
+};
+
+class Ranged : public Enemy {
+public:
+    Ranged(const sf::Vector2<float>& pos, const sf::Vector2<float>& size);
+
+    void update(const float& dt) override {}; //#TODO
+    void execute(Entity* entity) override {}; //#TODO
+
+    std::string serialize() const override;
+    static Entity* deserialize(std::string line);
+
+    bool isSolid() const override;
+private:
+
+};
 
 #endif //ENEMY_H
