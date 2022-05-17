@@ -1,5 +1,6 @@
 #include "../headers/Pathfinding.h"
 
+#include "../headers/Map.h"
 
 //todo tracePath
 

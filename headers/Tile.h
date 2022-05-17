@@ -1,9 +1,9 @@
-#include "Entity.h"
+
 
 
 #ifndef TILE_H
 #define TILE_H
-
+#include "Entity.h"
 
 class Tile : public Entity {
 private:

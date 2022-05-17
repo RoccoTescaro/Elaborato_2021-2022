@@ -4,12 +4,12 @@
 #define PATHFINDING_H
 #include <SFML/Graphics.hpp>
 #include <list>
-#include "Map.h"
 #include <bits/stdc++.h>
 
 using namespace sf;
 
 
+class Map;
 typedef std::pair<int,Vector2i>Pair;
 
 

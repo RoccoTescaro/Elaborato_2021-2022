@@ -1,11 +1,10 @@
 
 
 
-#include "Entity.h"
 #ifndef GAMECHARACTER_H
 #define GAMECHARACTER_H
-
-class PathAlgorithm;
+#include "Entity.h"
+#include "Pathfinding.h"
 
 class GameCharacter : public Entity {
 public:
