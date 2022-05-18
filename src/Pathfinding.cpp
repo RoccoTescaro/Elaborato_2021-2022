@@ -13,8 +13,14 @@ bool PathAlgorithm::isValid(Vector2i pos, bool flying){
         return !(map(pos)->isSolid());
         }
     else{
-        std::cout<<" exit::"<<true<<std::endl;
-        return true;
+        
+        if(pos.x>=0&&pos.x<=map.getDim().x&&
+           pos.y>=0&&pos.y<=map.getDim().y ){
+           std::cout<<" exit::"<<true<<std::endl;
+            return true;}
+        else{
+           std::cout<<" exit::"<<false<<std::endl;
+            return false;}
         }
 };
 
@@ -72,7 +78,7 @@ std::list<Vector2i> A_Star::tracePath(std::vector<std::vector<node>> nodeInfo,Ve
 }
 
 
-std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flying){
+std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flying,sf::RenderWindow &window){
     // saving map info
     int mapX=map.getDim().x;
     int mapY=map.getDim().y;
@@ -115,6 +121,7 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
         int gNew,hNew,fNew;
         //New node generation and exploration
         //---------TOP------------
+        std::cout<<"-----TOP-----"<<std::endl;
         if(isValid({i-1,j},flying)){
             if(isDestination({i-1,j},target)){
                
@@ -148,6 +155,7 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
             }
         }
         //---------BOTTOM------------
+        std::cout<<"-----BOTTOM-----"<<std::endl;
         if(isValid({i+1,j},flying)){
             if(isDestination({i+1,j},target)){
                
@@ -175,12 +183,12 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
                         nodeInfo[i + 1][j].h = hNew;
                         nodeInfo[i + 1][j].parentPos.x = i;
                         nodeInfo[i + 1][j].parentPos.y = j;
-
                         std::cout<<" new node built:parentPos:"<<nodeInfo[i - 1][j].parentPos.x<<"-"<<nodeInfo[i - 1][j].parentPos.y<<std::endl;
                    }
             }
         }
         //---------LEFT------------
+        std::cout<<"-----LEFT-----"<<std::endl;
         if(isValid({i,j-1},flying)){
             if(isDestination({i,j-1},target)){
                
@@ -214,6 +222,7 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
             }
         }
         //---------RIGHT------------
+        std::cout<<"-----RIGHT-----"<<std::endl;
         if(isValid({i,j+1},flying)){
             if(isDestination({i,j+1},target)){
                
@@ -245,7 +254,6 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
                    }
             }
         }
-
     }
     if (destFound==false){
         std::list<Vector2i> emptyList;

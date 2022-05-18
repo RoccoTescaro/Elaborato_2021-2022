@@ -35,7 +35,7 @@ class PathAlgorithm{
         bool isDestination(Vector2i pos,Vector2i target);
         bool isValid(Vector2i pos, bool flying);
         PathAlgorithm(Map &map): map(map){}
-        virtual std::list<Vector2i> findPath(Vector2i start, Vector2i end, bool flying)=0;
+        virtual std::list<Vector2i> findPath(Vector2i start, Vector2i end, bool flying,sf::RenderWindow &window)=0;
     protected:
         Map &map;
 };
@@ -44,13 +44,14 @@ class A_Star:public PathAlgorithm{
     public:
         A_Star(Map &map): PathAlgorithm(map){}
         std::list<Vector2i> tracePath(std::vector<std::vector<node>> nodeInfo,Vector2i target);
-        std::list<Vector2i> findPath(Vector2i start, Vector2i end, bool flying) override;
+        std::list<Vector2i> findPath(Vector2i start, Vector2i end, bool flying,sf::RenderWindow &window) override;
 };
 
 class DiglettMovement:public PathAlgorithm{
     public:
         DiglettMovement(Map &map): PathAlgorithm(map){}
-        std::list<Vector2i> findPath(Vector2i start, Vector2i playerPos, bool flying) override;
+        std::list<Vector2i> findPath(Vector2i start, Vector2i playerPos, bool flying,sf::RenderWindow &window
+    ) override;
 };
 
 
