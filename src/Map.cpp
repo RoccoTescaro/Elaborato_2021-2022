@@ -2,6 +2,7 @@
 #include <iostream>
 #include "../headers/Log.h"
 #include <cmath>
+#include <algorithm>
 
 #define DEFAULT_WIDTH 80
 #define DEFAULT_HEIGHT 40
@@ -41,12 +42,12 @@ void Map::appendEntity(const sf::Vector2<int>& pos, Entity* entity) {
 
 void Map::appendEntity(uint32_t index, Entity* entity) {
 	GameCharacter* character = dynamic_cast<GameCharacter*>(entity);
-	if (character && !Map::isOccupied(index, entity)) {
+	if (character && !Map::isOccupied(index, Map::entityLayer::gameCharacterLayer, entity->isSolid())) {
 		gameCharacters.emplace(index, character);
 		DEBUG("GameCharacter allocated, key:{%}", index);
 	}
 	Tile* tile = dynamic_cast<Tile*>(entity);
-	if (tile && !Map::isOccupied(index, entity)) {
+	if (tile && !Map::isOccupied(index, Map::entityLayer::tileLayer, entity->isSolid())) {
 		tiles.emplace(index, tile);
 		DEBUG("Tile allocated, key:{%}", index);
 	}
@@ -118,19 +119,23 @@ sf::Vector2<int> Map::indexToPos(uint32_t index) const {
 }
 
 uint32_t  Map::posToIndex(float x, float y) const {
+	x = std::min(dim.x * cellDim.x - 1.f, std::max(0.f, x));
+	y = std::min(dim.y * cellDim.y - 1.f, std::max(0.f, y));
 	return static_cast<uint32_t>(int(x / cellDim.x)) << 16 | static_cast<uint32_t>((int)y / cellDim.y);
 }
 
 uint32_t  Map::posToIndex(int x, int y) const {
+	x = std::min(dim.x - 1, std::max(0, x));
+	y = std::min(dim.y - 1, std::max(0, y));
 	return static_cast<uint32_t>(x) << 16 | static_cast<uint32_t>(y);
 }
 
 uint32_t  Map::posToIndex(const sf::Vector2<float>& pos) const {
-	return static_cast<uint32_t>(pos.x / cellDim.x) << 16 | static_cast<uint32_t>(pos.y / cellDim.y);
+	return posToIndex(pos.x,pos.y);
 }
 
 uint32_t  Map::posToIndex(const sf::Vector2<int>& pos) const {
-	return static_cast<uint32_t>(pos.x) << 16 | static_cast<uint32_t>(pos.y);
+	return posToIndex(pos.x,pos.y);
 }
 
 void Map::load(const std::string& filePath) {
@@ -186,9 +191,8 @@ void Map::render(sf::RenderWindow& window) {
 
 void Map::move(const sf::Vector2<int>& start, const sf::Vector2<int>& end) {
 	auto startCell = Map::getEntity(start, Map::entityLayer::gameCharacterLayer);
-	auto endCell = Map::getEntity(end, Map::entityLayer::gameCharacterLayer);
 
-	if (startCell && !endCell) {
+	if (startCell && !Map::isOccupied(end,Map::entityLayer::gameCharacterLayer,startCell->isSolid())) {
 		auto entity = gameCharacters.extract(posToIndex(start));
 		entity.key() = posToIndex(end);
 		gameCharacters.insert(std::move(entity));
@@ -196,43 +200,34 @@ void Map::move(const sf::Vector2<int>& start, const sf::Vector2<int>& end) {
 	}
 }
 
-bool  Map::isOccupied(float x, float y, Entity* entity) const {
-	return Map::isOccupied(posToIndex(x, y), entity);
+bool  Map::isOccupied(float x, float y, Map::entityLayer layer, bool solid) const {
+	return Map::isOccupied(posToIndex(x, y), layer, solid);
 }
 
-bool  Map::isOccupied(int x, int y, Entity* entity) const {
-	return Map::isOccupied(posToIndex(x, y), entity);
+bool  Map::isOccupied(int x, int y, Map::entityLayer layer, bool solid) const {
+	return Map::isOccupied(posToIndex(x, y), layer, solid);
 }
 
-bool  Map::isOccupied(const sf::Vector2<float>& pos, Entity* entity) const {
-	return Map::isOccupied(posToIndex(pos), entity);
+bool  Map::isOccupied(const sf::Vector2<float>& pos, Map::entityLayer layer, bool solid) const {
+	return Map::isOccupied(posToIndex(pos), layer, solid);
 }
 
-bool  Map::isOccupied(const sf::Vector2<int>& pos, Entity* entity) const {
-	return Map::isOccupied(posToIndex(pos), entity);
+bool  Map::isOccupied(const sf::Vector2<int>& pos, Map::entityLayer layer, bool solid) const {
+	return Map::isOccupied(posToIndex(pos), layer, solid);
 }
 
-bool Map::isOccupied(uint32_t index, Entity* entity) const {
-
-	auto clientGameCharacter = dynamic_cast<GameCharacter*>(entity);
-	auto clientTile = dynamic_cast<Tile*>(entity);
+bool Map::isOccupied(uint32_t index, Map::entityLayer layer, bool solid) const {
 	auto gameCharacter = Map::getEntity(index, Map::entityLayer::gameCharacterLayer);
 	auto tile = Map::getEntity(index, Map::entityLayer::tileLayer);
 
-	if (clientGameCharacter) 
-	{
-		if (gameCharacter) return true;
-		else if (tile) return clientGameCharacter->isSolid() || tile->isSolid();
-		else return false;
+	switch (layer) {
+		case Map::entityLayer::any:
+			return gameCharacter || tile;
+		case Map::entityLayer::tileLayer:
+			return tile || (solid && gameCharacter) || (!solid && gameCharacter && gameCharacter->isSolid());
+		case Map::entityLayer::gameCharacterLayer:
+			return gameCharacter || (solid && tile) || (!solid && tile && tile->isSolid());
 	}
-	if(clientTile)
-	{
-		if (tile) return true;
-		else if (gameCharacter) return clientTile->isSolid() || gameCharacter->isSolid();
-		else return false;
-	}
-
-	return false;
 }
 
 const sf::Vector2<int>& Map::getDim() const {

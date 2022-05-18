@@ -45,10 +45,10 @@ public:
 	void render(sf::RenderWindow& window);
 
 	void move(const sf::Vector2<int>& start, const sf::Vector2<int>& end); //only for GameCharacters
-	bool isOccupied(float x, float y, Entity* entity) const;
-	bool isOccupied(int x, int y, Entity* entity) const;
-	bool isOccupied(const sf::Vector2<float>& pos, Entity* entity) const;
-	bool isOccupied(const sf::Vector2<int>& pos, Entity* entity) const;
+	bool isOccupied(float x, float y, Map::entityLayer layer, bool solid = true) const;
+	bool isOccupied(int x, int y, Map::entityLayer layer, bool solid = true) const;
+	bool isOccupied(const sf::Vector2<float>& pos, Map::entityLayer layer, bool solid = true) const;
+	bool isOccupied(const sf::Vector2<int>& pos, Map::entityLayer layer, bool solid = true) const;
 
 	const sf::Vector2<int>& getDim() const;
 	const sf::Vector2<float>& getCellDim() const;
@@ -58,7 +58,7 @@ private:
 	void removeEntity(uint32_t index, Map::entityLayer layer = entityLayer::any);
 	Entity* getEntity(uint32_t index, Map::entityLayer layer = entityLayer::any) const;
 	
-	bool isOccupied(uint32_t index, Entity* entity) const;
+	bool isOccupied(uint32_t index, Map::entityLayer layer, bool solid = true) const;
 	
 	std::unordered_map<std::string, Entity* (*)(std::string)> registedType;
 
