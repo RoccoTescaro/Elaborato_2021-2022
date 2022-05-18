@@ -5,32 +5,59 @@
 //todo tracePath
 
 
-int PathAlgorithm::calculateHValue(Vector2i pos, Vector2i target){
-return (abs(pos.x-target.x)+abs(pos.y-target.y));
-}
-
 bool PathAlgorithm::isValid(Vector2i pos, bool flying){
-    return !(map(pos)->isSolid());
+    std::cout<<"\n isValid "<<std::endl;
+    std::cout<<" i,j:"<<pos.x<<"-"<<pos.y<<std::endl;
+    if(map(pos)!=nullptr){
+        std::cout<<" exit::"<<!(map(pos)->isSolid())<<std::endl;
+        return !(map(pos)->isSolid());
+        }
+    else{
+        std::cout<<" exit::"<<true<<std::endl;
+        return true;
+        }
 };
 
 bool PathAlgorithm::isDestination(Vector2i pos,Vector2i target){
+    std::cout<<"\n       isDestination "<<std::endl;
+    std::cout<<"    i,j:"<<pos.x<<"-"<<pos.y<<std::endl;
+    std::cout<<"    target:"<<target.x<<"-"<<target.y<<std::endl;
+    std::cout<<"    exit::"<<(pos==target)<<std::endl;
     return (pos==target);
 }
 
-std::list<Vector2i> A_Star::tracePath(node *nodeInfo,int width,int height,Vector2i target){
-    
+int PathAlgorithm::calculateHValue(Vector2i pos, Vector2i target){
+    std::cout<<"\n           calculateHValue "<<std::endl;
+    std::cout<<"         i,j:"<<pos.x<<"-"<<pos.y<<std::endl;
+    std::cout<<"         target:"<<target.x<<"-"<<target.y<<std::endl;
+    std::cout<<"         exit::"<<(abs(pos.x-target.x)+abs(pos.y-target.y))<<std::endl;
+return (abs(pos.x-target.x)+abs(pos.y-target.y));
+}
+
+std::list<Vector2i> A_Star::tracePath(std::vector<std::vector<node>> nodeInfo,Vector2i target){
+    std::cout<<"STARTING TRACEPATH ALGORITHM"<<std::endl;
+    //declaring starting point
     int row = target.x;
     int col = target.y;
- 
+    std::cout<<" i,j:"<<row<<"-"<<col<<std::endl;
+    //temporary data holder
     std::stack<Vector2i> Path;
- 
-    while (!(nodeInfo[row*width+col].parentPos.x == row
-             && nodeInfo[row*width+col].parentPos.y == col)) {
+    //building path
+    while (!(nodeInfo[row][col].parentPos.x == row
+             && nodeInfo[row][col].parentPos.y == col)) {
+        //insertion in path
+
         Path.push({row,col});
-        int temp_row = nodeInfo[row*width+col].parentPos.x ;
-        int temp_col = nodeInfo[row*width+col].parentPos.y ;
+        std::cout<<" element inserted in path:"<<row<<"-"<<col<<std::endl;
+
+        //getting new node
+        int temp_row = nodeInfo[row][col].parentPos.x ;
+        int temp_col = nodeInfo[row][col].parentPos.y ;
         row = temp_row;
         col = temp_col;
+        std::cout<<"a"<<std::endl;
+        std::cout<<" new node:"<<row<<"-"<<col<<std::endl;
+
     }
  
     Path.push({row,col});
@@ -53,18 +80,13 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
     //initialize closed list and node info structure
     bool closedList[mapX][mapY];
     memset(closedList,false,sizeof(closedList));
-    node nodeInfo[mapX][mapY];
-    for (int i = 0; i < mapX; i++)
-    {
-        for (int j = 0; j < mapY; j++)
-        {
-            nodeInfo[i][j].f=INT32_MAX;
-            nodeInfo[i][j].g=INT32_MAX;
-            nodeInfo[i][j].h=INT32_MAX;
-            nodeInfo[i][j].parentPos={-1,-1};
-        }
-        
-    }
+    node n;
+    n.f=INT32_MAX;
+    n.g=INT32_MAX;
+    n.h=INT32_MAX;
+    n.parentPos={-1,-1};
+    std::vector<std::vector<node>> nodeInfo(mapX,std::vector<node>(mapY, n));
+    std::cout<<"a"<<std::endl;
     //initialize starting node
     nodeInfo[start.x][start.y].f=0;
     nodeInfo[start.x][start.y].g=0;
@@ -72,7 +94,7 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
     nodeInfo[start.x][start.y].parentPos={start.x,start.y};
 
     //initialize open list
-    std::set<Pair> openList;
+    std::set<Pair,Compare> openList;
     openList.insert(std::make_pair(0,start));
 
     bool destFound=false;
@@ -80,9 +102,14 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
     while(!openList.empty()){
         //getting and exploring next node
         Pair p=*openList.begin();
+        std::cout<<" NEW NODE:"<<p.second.x<<"-"<<p.second.y<<std::endl;
+
         openList.erase(openList.begin());
+
         int i=p.second.x;
         int j=p.second.y;
+        
+        std::cout<<"i,j:"<<i<<"-"<<j<<std::endl;
         closedList[i][j]=true;
         //init necessary value
         int gNew,hNew,fNew;
@@ -93,10 +120,12 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
                
                 nodeInfo[i - 1][j].parentPos.x = i;
                 nodeInfo[i - 1][j].parentPos.y = j;
-                printf("The destination cell is found\n");
+
+                        std::cout<<" new node built:parentPos:"<<nodeInfo[i - 1][j].parentPos.x<<"-"<<nodeInfo[i - 1][j].parentPos.y<<std::endl;
+                printf("The destination cell is found: TOP\n");
                 destFound = true; 
                     //costruisci e rendi la listadi passi
-                return tracePath(&nodeInfo[0][0], mapX,mapY,target);
+                return tracePath(nodeInfo,target);
             }
             else if(closedList[i-1][j]==false){
                 //calcolo f
@@ -113,6 +142,8 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
                         nodeInfo[i - 1][j].h = hNew;
                         nodeInfo[i - 1][j].parentPos.x = i;
                         nodeInfo[i - 1][j].parentPos.y = j;
+                        std::cout<<" new node built:parentPos:"<<nodeInfo[i - 1][j].parentPos.x<<"-"<<nodeInfo[i - 1][j].parentPos.y<<std::endl;
+
                    }
             }
         }
@@ -122,10 +153,12 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
                
                 nodeInfo[i + 1][j].parentPos.x = i;
                 nodeInfo[i + 1][j].parentPos.y = j;
-                printf("The destination cell is found\n");
+
+                        std::cout<<" new node built:parentPos:"<<nodeInfo[i - 1][j].parentPos.x<<"-"<<nodeInfo[i - 1][j].parentPos.y<<std::endl;
+                printf("The destination cell is found: BOTTOM\n");
                 destFound = true; 
                     //costruisci e rendi la listadi passi
-                return tracePath(&nodeInfo[0][0], mapX,mapY,target);
+                return tracePath(nodeInfo,target);
             }
             else if(closedList[i+1][j]==false){
                 //calcolo f
@@ -142,6 +175,8 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
                         nodeInfo[i + 1][j].h = hNew;
                         nodeInfo[i + 1][j].parentPos.x = i;
                         nodeInfo[i + 1][j].parentPos.y = j;
+
+                        std::cout<<" new node built:parentPos:"<<nodeInfo[i - 1][j].parentPos.x<<"-"<<nodeInfo[i - 1][j].parentPos.y<<std::endl;
                    }
             }
         }
@@ -151,10 +186,12 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
                
                 nodeInfo[i][j-1].parentPos.x = i;
                 nodeInfo[i][j-1].parentPos.y = j;
-                printf("The destination cell is found\n");
+
+                        std::cout<<" new node built:parentPos:"<<nodeInfo[i - 1][j].parentPos.x<<"-"<<nodeInfo[i - 1][j].parentPos.y<<std::endl;
+                printf("The destination cell is found: LEFT\n");
                 destFound = true; 
                     //costruisci e rendi la listadi passi
-                return tracePath(&nodeInfo[0][0], mapX,mapY,target);
+                return tracePath(nodeInfo,target);
             }
             else if(closedList[i][j-1]==false){
                 //calcolo f
@@ -171,6 +208,8 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
                         nodeInfo[i][j-1].h = hNew;
                         nodeInfo[i][j-1].parentPos.x = i;
                         nodeInfo[i][j-1].parentPos.y = j;
+
+                        std::cout<<" new node built:parentPos:"<<nodeInfo[i - 1][j].parentPos.x<<"-"<<nodeInfo[i - 1][j].parentPos.y<<std::endl;
                    }
             }
         }
@@ -180,10 +219,12 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
                
                 nodeInfo[i][j+1].parentPos.x = i;
                 nodeInfo[i][j+1].parentPos.y = j;
-                printf("The destination cell is found\n");
+
+                        std::cout<<" new node built:parentPos:"<<nodeInfo[i - 1][j].parentPos.x<<"-"<<nodeInfo[i - 1][j].parentPos.y<<std::endl;
+                printf("The destination cell is found: RIGHT\n");
                 destFound = true; 
                     //costruisci e rendi la listadi passi
-                return tracePath(&nodeInfo[0][0], mapX,mapY,target);
+                return tracePath(nodeInfo,target);
             }
             else if(closedList[i][j+1]==false){
                 //calcolo f
@@ -200,14 +241,15 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
                         nodeInfo[i][j+1].h = hNew;
                         nodeInfo[i][j+1].parentPos.x = i;
                         nodeInfo[i][j+1].parentPos.y = j;
+                        std::cout<<" new node built:parentPos:"<<nodeInfo[i - 1][j].parentPos.x<<"-"<<nodeInfo[i - 1][j].parentPos.y<<std::endl;
                    }
             }
         }
-        if (destFound==false){
-            std::list<Vector2i> emptyList;
-            return emptyList;
-        }
 
+    }
+    if (destFound==false){
+        std::list<Vector2i> emptyList;
+        return emptyList;
     }
 
 };

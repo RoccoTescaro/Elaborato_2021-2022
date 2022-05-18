@@ -11,7 +11,14 @@ using namespace sf;
 
 class Map;
 typedef std::pair<int,Vector2i>Pair;
-
+struct Compare
+{
+    bool operator ()( const Pair &p1, 
+                      const Pair &p2 ) const
+    {
+        return ( p1.first  <  p2.first );
+    }
+};
 
 
 class PathAlgorithm{
@@ -36,7 +43,7 @@ class PathAlgorithm{
 class A_Star:public PathAlgorithm{
     public:
         A_Star(Map &map): PathAlgorithm(map){}
-        std::list<Vector2i> tracePath(node *nodeinfo,int width,int height,Vector2i target);
+        std::list<Vector2i> tracePath(std::vector<std::vector<node>> nodeInfo,Vector2i target);
         std::list<Vector2i> findPath(Vector2i start, Vector2i end, bool flying) override;
 };
 
