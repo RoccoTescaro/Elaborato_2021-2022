@@ -4,8 +4,13 @@
 #include <cmath>
 #include <algorithm>
 
-#define DEFAULT_WIDTH 80
-#define DEFAULT_HEIGHT 40
+#ifndef _DEBUG 
+#define BASE_WIDTH 0
+#define BASE_HEIGHT 0
+#else //EDITOR MODE (don't optimize space)
+#define BASE_WIDTH 1024
+#define BASE_HEIGHT 1024
+#endif
 
 #define REGISTER(Type) std::make_pair(#Type, &Type::deserialize)
 
@@ -142,13 +147,18 @@ void Map::load(const std::string& filePath) {
 	std::fstream file;
 	file.open(filePath, std::fstream::in);
 	std::string line;
-	dim = { DEFAULT_WIDTH , DEFAULT_HEIGHT };
+	dim = { BASE_WIDTH , BASE_HEIGHT };
 
 	while (std::getline(file, line))
 	{
 		std::string string = line;
 		uint32_t index = static_cast<uint32_t>(std::stoul(string.substr(0, string.find(" "))));
 		string.erase(0, string.find(" ") + 1);
+
+		sf::Vector2<int> pos = { index >> 16, index & 0x0000FFFFU }; //setting up map dimension 
+		if (pos.x > dim.x) dim.x = pos.x+1;
+		if (pos.y > dim.y) dim.y = pos.y+1;
+
 		std::string type = string.substr(0, string.find(" "));
 		string.erase(0, string.find(" ") + 1);
 		auto deserialize = registedType[type];
@@ -158,10 +168,6 @@ void Map::load(const std::string& filePath) {
 		}
 		else
 			DEBUG("Error trying to deserialize entity. Probably loading txt file has been corrupted.");
-
-		auto pos = indexToPos(index); //setting up map dimension 
-		if (pos.x > dim.x) dim.x = pos.x;
-		if (pos.y > dim.y) dim.y = pos.y;
 	}
 }
 
