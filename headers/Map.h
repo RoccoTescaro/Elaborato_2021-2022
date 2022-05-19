@@ -24,20 +24,20 @@ public:
 	void removeEntity(const sf::Vector2<float>& pos, Map::entityLayer layer = entityLayer::any);
 	void removeEntity(const sf::Vector2<int>& pos, Map::entityLayer layer = entityLayer::any);
 
-	Entity* operator()(float x, float y, Map::entityLayer layer = entityLayer::any); //getEntity with any as layer prioritize gameCharacter
-	Entity* operator()(int x, int y, Map::entityLayer layer = entityLayer::any);
-	Entity* operator()(const sf::Vector2<float>& pos, Map::entityLayer layer = entityLayer::any);
-	Entity* operator()(const sf::Vector2<int>& pos, Map::entityLayer layer = entityLayer::any);
-	Entity* getEntity(float x, float y, Map::entityLayer layer = entityLayer::any);
-	Entity* getEntity(int x, int y, Map::entityLayer layer = entityLayer::any);
-	Entity* getEntity(const sf::Vector2<float>& pos, Map::entityLayer layer = entityLayer::any);
-	Entity* getEntity(const sf::Vector2<int>& pos, Map::entityLayer layer = entityLayer::any);
+	Entity* operator()(float x, float y, Map::entityLayer layer = entityLayer::any) const; //getEntity with any as layer prioritize gameCharacter
+	Entity* operator()(int x, int y, Map::entityLayer layer = entityLayer::any) const;
+	Entity* operator()(const sf::Vector2<float>& pos, Map::entityLayer layer = entityLayer::any) const;
+	Entity* operator()(const sf::Vector2<int>& pos, Map::entityLayer layer = entityLayer::any) const;
+	Entity* getEntity(float x, float y, Map::entityLayer layer = entityLayer::any) const;
+	Entity* getEntity(int x, int y, Map::entityLayer layer = entityLayer::any) const;
+	Entity* getEntity(const sf::Vector2<float>& pos, Map::entityLayer layer = entityLayer::any) const;
+	Entity* getEntity(const sf::Vector2<int>& pos, Map::entityLayer layer = entityLayer::any) const;
 
-	sf::Vector2<int> indexToPos(uint32_t index);
-	uint32_t posToIndex(float x, float y);
-	uint32_t posToIndex(int x, int y);
-	uint32_t posToIndex(const sf::Vector2<float>& pos);
-	uint32_t posToIndex(const sf::Vector2<int>& pos);
+	sf::Vector2<int> indexToPos(uint32_t index) const;
+	uint32_t posToIndex(float x, float y) const;
+	uint32_t posToIndex(int x, int y) const;
+	uint32_t posToIndex(const sf::Vector2<float>& pos) const;
+	uint32_t posToIndex(const sf::Vector2<int>& pos) const;
 
 	void load(const std::string& filePath); 
 	void save(const std::string& filePath) const; 
@@ -45,6 +45,10 @@ public:
 	void render(sf::RenderWindow& window);
 
 	void move(const sf::Vector2<int>& start, const sf::Vector2<int>& end); //only for GameCharacters
+	bool isOccupied(float x, float y, Map::entityLayer layer, bool solid = true) const;
+	bool isOccupied(int x, int y, Map::entityLayer layer, bool solid = true) const;
+	bool isOccupied(const sf::Vector2<float>& pos, Map::entityLayer layer, bool solid = true) const;
+	bool isOccupied(const sf::Vector2<int>& pos, Map::entityLayer layer, bool solid = true) const;
 
 	const sf::Vector2<int>& getDim() const;
 	const sf::Vector2<float>& getCellDim() const;
@@ -52,7 +56,9 @@ public:
 private:
 	void appendEntity(uint32_t index, Entity* entity);
 	void removeEntity(uint32_t index, Map::entityLayer layer = entityLayer::any);
-	Entity* getEntity(uint32_t index, Map::entityLayer layer = entityLayer::any);
+	Entity* getEntity(uint32_t index, Map::entityLayer layer = entityLayer::any) const;
+	
+	bool isOccupied(uint32_t index, Map::entityLayer layer, bool solid = true) const;
 	
 	std::unordered_map<std::string, Entity* (*)(std::string)> registedType;
 

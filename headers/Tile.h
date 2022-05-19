@@ -1,11 +1,19 @@
+<<<<<<< HEAD
 
 
 
 #ifndef TILE_H
 #define TILE_H
+=======
+#ifndef TILES_H
+#define TILES_H
+
+>>>>>>> Map
 #include "Entity.h"
+#include <string>
 
 class Tile : public Entity {
+<<<<<<< HEAD
 private:
 public:
 	
@@ -19,20 +27,31 @@ public:
 		return a;
 	};
 /// TILE TYPES
+=======
+public:
+	Tile(const sf::Vector2<float>& pos, const sf::Vector2<float>& size) : Entity(pos, size) {};
+protected:
+
+>>>>>>> Map
 };
 
 
 class Wall : public Tile {
 public:
-	Wall(const sf::Color& color, sf::Vector2<int> pos, const sf::Vector2<float>& cellDim) : Tile(color, pos, cellDim, true) {
-		sprite.setFillColor(color);
-	}
-	void update(const float &deltaTime) override{};
-	void execute(Entity& e) override {}; 
-	static Entity* deserialize(std::string string);
-	std::string serialize() override;
+	Wall(const sf::Vector2<float>& pos, const sf::Vector2<float>& size);
+
+	void update(const float& dt) override {}; //#TODO
+	void execute(Entity* entity) override {}; //#TODO
+
+	std::string serialize() const override;
+	static Entity* deserialize(std::string line);
+
+	bool isSolid() const override;
+private:
+
 };
 
+<<<<<<< HEAD
 
 
 class Hole : public Tile {
@@ -41,9 +60,26 @@ class Hole : public Tile {
 	Hole(const sf::Color& color,sf::Vector2<int> pos, const sf::Vector2<float>& cellDim) : Tile(color,pos, cellDim, true) {
 		sprite.setFillColor(sf::Color(0, 255, 0, 255));
 	}
+=======
+class Hole : public Tile {
+public:
+	Hole(const sf::Vector2<float>& pos, const sf::Vector2<float>& size);
+>>>>>>> Map
 
-	void update(const float &deltaTime) override{};
-	void execute(Entity& e) override {}; 
+	void update(const float& dt) override {}; //#TODO
+	void execute(Entity* entity) override {}; //#TODO
 
+<<<<<<< HEAD
 };
 #endif //TILE_H
+=======
+	std::string serialize() const override;
+	static Entity* deserialize(std::string line);
+
+	bool isSolid() const override;
+private:
+
+};
+
+#endif //TILES_H
+>>>>>>> Map

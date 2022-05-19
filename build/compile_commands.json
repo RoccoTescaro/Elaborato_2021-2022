@@ -1,0 +1,67 @@
+[
+{
+  "directory": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build",
+  "command": "/usr/bin/g++   -g -std=gnu++20 -o CMakeFiles/bench.dir/main.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/main.cpp",
+  "file": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/main.cpp"
+},
+{
+  "directory": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build",
+  "command": "/usr/bin/g++   -g -std=gnu++20 -o CMakeFiles/bench.dir/src/Input.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Input.cpp",
+  "file": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Input.cpp"
+},
+{
+  "directory": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build",
+  "command": "/usr/bin/g++   -g -std=gnu++20 -o CMakeFiles/bench.dir/src/Application.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Application.cpp",
+  "file": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Application.cpp"
+},
+{
+  "directory": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build",
+  "command": "/usr/bin/g++   -g -std=gnu++20 -o CMakeFiles/bench.dir/src/Button.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Button.cpp",
+  "file": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Button.cpp"
+},
+{
+  "directory": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build",
+  "command": "/usr/bin/g++   -g -std=gnu++20 -o CMakeFiles/bench.dir/src/DialoguePanel.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/DialoguePanel.cpp",
+  "file": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/DialoguePanel.cpp"
+},
+{
+  "directory": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build",
+  "command": "/usr/bin/g++   -g -std=gnu++20 -o CMakeFiles/bench.dir/src/Enemy.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Enemy.cpp",
+  "file": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Enemy.cpp"
+},
+{
+  "directory": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build",
+  "command": "/usr/bin/g++   -g -std=gnu++20 -o CMakeFiles/bench.dir/src/Entity.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Entity.cpp",
+  "file": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Entity.cpp"
+},
+{
+  "directory": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build",
+  "command": "/usr/bin/g++   -g -std=gnu++20 -o CMakeFiles/bench.dir/src/GameCharacter.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/GameCharacter.cpp",
+  "file": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/GameCharacter.cpp"
+},
+{
+  "directory": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build",
+  "command": "/usr/bin/g++   -g -std=gnu++20 -o CMakeFiles/bench.dir/src/Menu.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Menu.cpp",
+  "file": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Menu.cpp"
+},
+{
+  "directory": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build",
+  "command": "/usr/bin/g++   -g -std=gnu++20 -o CMakeFiles/bench.dir/src/Player.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Player.cpp",
+  "file": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Player.cpp"
+},
+{
+  "directory": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build",
+  "command": "/usr/bin/g++   -g -std=gnu++20 -o CMakeFiles/bench.dir/src/Tile.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Tile.cpp",
+  "file": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Tile.cpp"
+},
+{
+  "directory": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build",
+  "command": "/usr/bin/g++   -g -std=gnu++20 -o CMakeFiles/bench.dir/src/Pathfinding.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Pathfinding.cpp",
+  "file": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Pathfinding.cpp"
+},
+{
+  "directory": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build",
+  "command": "/usr/bin/g++   -g -std=gnu++20 -o CMakeFiles/bench.dir/src/Map.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Map.cpp",
+  "file": "/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Map.cpp"
+}
+]
