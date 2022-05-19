@@ -11,7 +11,7 @@ using namespace sf;
 
 class Map;
 typedef std::pair<int,Vector2i>Pair;
-struct Compare
+struct fCompare
 {
     bool operator ()( const Pair &p1, 
                       const Pair &p2 ) const

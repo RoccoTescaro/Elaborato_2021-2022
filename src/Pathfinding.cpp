@@ -95,7 +95,7 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
     nodeInfo[start.x][start.y].parentPos={start.x,start.y};
 
     //initialize open list
-    std::set<Pair,Compare> openList;
+    std::set<Pair,fCompare> openList;
     openList.insert(std::make_pair(0,start));
 
     bool destFound=false;
