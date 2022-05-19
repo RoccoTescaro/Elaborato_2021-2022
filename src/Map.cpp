@@ -47,15 +47,17 @@ void Map::appendEntity(const sf::Vector2<int>& pos, Entity* entity) {
 
 void Map::appendEntity(uint32_t index, Entity* entity) {
 	GameCharacter* character = dynamic_cast<GameCharacter*>(entity);
+	Tile* tile = dynamic_cast<Tile*>(entity);
 	if (character && !Map::isOccupied(index, Map::entityLayer::gameCharacterLayer, entity->isSolid())) {
 		gameCharacters.emplace(index, character);
 		DEBUG("GameCharacter allocated, key:{%}", index);
 	}
-	Tile* tile = dynamic_cast<Tile*>(entity);
-	if (tile && !Map::isOccupied(index, Map::entityLayer::tileLayer, entity->isSolid())) {
+	else if (tile && !Map::isOccupied(index, Map::entityLayer::tileLayer, entity->isSolid())) {
 		tiles.emplace(index, tile);
 		DEBUG("Tile allocated, key:{%}", index);
 	}
+	else
+		delete entity;
 }
 
 void Map::removeEntity(float x, float y, Map::entityLayer layer) {
@@ -156,8 +158,8 @@ void Map::load(const std::string& filePath) {
 		string.erase(0, string.find(" ") + 1);
 
 		sf::Vector2<int> pos = { index >> 16, index & 0x0000FFFFU }; //setting up map dimension 
-		if (pos.x > dim.x) dim.x = pos.x+1;
-		if (pos.y > dim.y) dim.y = pos.y+1;
+		if (pos.x >= dim.x) dim.x = pos.x+1;
+		if (pos.y >= dim.y) dim.y = pos.y+1;
 
 		std::string type = string.substr(0, string.find(" "));
 		string.erase(0, string.find(" ") + 1);
