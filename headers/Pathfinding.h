@@ -16,7 +16,7 @@ struct Compare
     bool operator ()( const Pair &p1, 
                       const Pair &p2 ) const
     {
-        return ( p1.first  <  p2.first );
+        return ( p1.first  <=  p2.first );
     }
 };
 
