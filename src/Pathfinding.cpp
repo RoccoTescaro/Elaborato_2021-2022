@@ -7,20 +7,9 @@
 
 bool PathAlgorithm::isValid(Vector2i pos, bool flying){
     std::cout<<" isValid "<<std::endl;
-    if(map(pos)!=nullptr){
-        std::cout<<" exit::"<<!(map(pos)->isSolid())<<std::endl;
-        return !(map(pos)->isSolid());
-        }
-    else{
+    std::cout<<" exit::"<<!(map.isOccupied(pos,Map::entityLayer::gameCharacterLayer,flying))<<std::endl;
+    return !(map.isOccupied(pos,Map::entityLayer::gameCharacterLayer,flying));
         
-        if(pos.x>=0&&pos.x<=map.getDim().x&&
-           pos.y>=0&&pos.y<=map.getDim().y ){
-           std::cout<<" exit::"<<true<<std::endl;
-            return true;}
-        else{
-           std::cout<<" exit::"<<false<<std::endl;
-            return false;}
-        }
 };
 
 bool PathAlgorithm::isDestination(Vector2i pos,Vector2i target){

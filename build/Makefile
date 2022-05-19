@@ -225,30 +225,6 @@ src/DialoguePanel.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/bench.dir/build.make CMakeFiles/bench.dir/src/DialoguePanel.cpp.s
 .PHONY : src/DialoguePanel.cpp.s
 
-src/Enemy.o: src/Enemy.cpp.o
-.PHONY : src/Enemy.o
-
-# target to build an object file
-src/Enemy.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/bench.dir/build.make CMakeFiles/bench.dir/src/Enemy.cpp.o
-.PHONY : src/Enemy.cpp.o
-
-src/Enemy.i: src/Enemy.cpp.i
-.PHONY : src/Enemy.i
-
-# target to preprocess a source file
-src/Enemy.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/bench.dir/build.make CMakeFiles/bench.dir/src/Enemy.cpp.i
-.PHONY : src/Enemy.cpp.i
-
-src/Enemy.s: src/Enemy.cpp.s
-.PHONY : src/Enemy.s
-
-# target to generate assembly for a file
-src/Enemy.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/bench.dir/build.make CMakeFiles/bench.dir/src/Enemy.cpp.s
-.PHONY : src/Enemy.cpp.s
-
 src/Entity.o: src/Entity.cpp.o
 .PHONY : src/Entity.o
 
@@ -393,30 +369,6 @@ src/Pathfinding.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/bench.dir/build.make CMakeFiles/bench.dir/src/Pathfinding.cpp.s
 .PHONY : src/Pathfinding.cpp.s
 
-src/Player.o: src/Player.cpp.o
-.PHONY : src/Player.o
-
-# target to build an object file
-src/Player.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/bench.dir/build.make CMakeFiles/bench.dir/src/Player.cpp.o
-.PHONY : src/Player.cpp.o
-
-src/Player.i: src/Player.cpp.i
-.PHONY : src/Player.i
-
-# target to preprocess a source file
-src/Player.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/bench.dir/build.make CMakeFiles/bench.dir/src/Player.cpp.i
-.PHONY : src/Player.cpp.i
-
-src/Player.s: src/Player.cpp.s
-.PHONY : src/Player.s
-
-# target to generate assembly for a file
-src/Player.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/bench.dir/build.make CMakeFiles/bench.dir/src/Player.cpp.s
-.PHONY : src/Player.cpp.s
-
 src/Tile.o: src/Tile.cpp.o
 .PHONY : src/Tile.o
 
@@ -462,9 +414,6 @@ help:
 	@echo "... src/DialoguePanel.o"
 	@echo "... src/DialoguePanel.i"
 	@echo "... src/DialoguePanel.s"
-	@echo "... src/Enemy.o"
-	@echo "... src/Enemy.i"
-	@echo "... src/Enemy.s"
 	@echo "... src/Entity.o"
 	@echo "... src/Entity.i"
 	@echo "... src/Entity.s"
@@ -483,9 +432,6 @@ help:
 	@echo "... src/Pathfinding.o"
 	@echo "... src/Pathfinding.i"
 	@echo "... src/Pathfinding.s"
-	@echo "... src/Player.o"
-	@echo "... src/Player.i"
-	@echo "... src/Player.s"
 	@echo "... src/Tile.o"
 	@echo "... src/Tile.i"
 	@echo "... src/Tile.s"

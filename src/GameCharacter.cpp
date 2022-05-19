@@ -1,6 +1,4 @@
 #include "../headers/GameCharacter.h"
-<<<<<<< HEAD
-=======
 #include <iostream>
 
 uint8_t GameCharacter::getInitiative() const {
@@ -146,4 +144,3 @@ Entity* Player::deserialize(std::string line) {
 bool Player::isSolid() const {
 	return true;
 }
->>>>>>> Map

@@ -1,13 +1,5 @@
 #include "../headers/Entity.h"
 
-<<<<<<< HEAD
-
-
-bool Entity::isSolid(bool flying)
-	{
-		return this->solid;
-	}
-=======
 Entity::Entity(const sf::Vector2<float>& pos, const sf::Vector2<float>& size) {
 	testingSprite.setPosition(pos);
 	testingSprite.setSize(size);
@@ -32,4 +24,3 @@ void Entity::parseString(std::vector<std::string>& parameters, std::string& line
 	}
 	parameters.push_back(line.substr(0, line.find("}")));
 }
->>>>>>> Map

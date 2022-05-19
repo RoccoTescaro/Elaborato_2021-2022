@@ -139,24 +139,10 @@ CMakeFiles/bench.dir/src/DialoguePanel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bench.dir/src/DialoguePanel.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/DialoguePanel.cpp -o CMakeFiles/bench.dir/src/DialoguePanel.cpp.s
 
-CMakeFiles/bench.dir/src/Enemy.cpp.o: CMakeFiles/bench.dir/flags.make
-CMakeFiles/bench.dir/src/Enemy.cpp.o: ../src/Enemy.cpp
-CMakeFiles/bench.dir/src/Enemy.cpp.o: CMakeFiles/bench.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/bench.dir/src/Enemy.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bench.dir/src/Enemy.cpp.o -MF CMakeFiles/bench.dir/src/Enemy.cpp.o.d -o CMakeFiles/bench.dir/src/Enemy.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Enemy.cpp
-
-CMakeFiles/bench.dir/src/Enemy.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/bench.dir/src/Enemy.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Enemy.cpp > CMakeFiles/bench.dir/src/Enemy.cpp.i
-
-CMakeFiles/bench.dir/src/Enemy.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bench.dir/src/Enemy.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Enemy.cpp -o CMakeFiles/bench.dir/src/Enemy.cpp.s
-
 CMakeFiles/bench.dir/src/Entity.cpp.o: CMakeFiles/bench.dir/flags.make
 CMakeFiles/bench.dir/src/Entity.cpp.o: ../src/Entity.cpp
 CMakeFiles/bench.dir/src/Entity.cpp.o: CMakeFiles/bench.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/bench.dir/src/Entity.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/bench.dir/src/Entity.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bench.dir/src/Entity.cpp.o -MF CMakeFiles/bench.dir/src/Entity.cpp.o.d -o CMakeFiles/bench.dir/src/Entity.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Entity.cpp
 
 CMakeFiles/bench.dir/src/Entity.cpp.i: cmake_force
@@ -170,7 +156,7 @@ CMakeFiles/bench.dir/src/Entity.cpp.s: cmake_force
 CMakeFiles/bench.dir/src/GameCharacter.cpp.o: CMakeFiles/bench.dir/flags.make
 CMakeFiles/bench.dir/src/GameCharacter.cpp.o: ../src/GameCharacter.cpp
 CMakeFiles/bench.dir/src/GameCharacter.cpp.o: CMakeFiles/bench.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/bench.dir/src/GameCharacter.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/bench.dir/src/GameCharacter.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bench.dir/src/GameCharacter.cpp.o -MF CMakeFiles/bench.dir/src/GameCharacter.cpp.o.d -o CMakeFiles/bench.dir/src/GameCharacter.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/GameCharacter.cpp
 
 CMakeFiles/bench.dir/src/GameCharacter.cpp.i: cmake_force
@@ -184,7 +170,7 @@ CMakeFiles/bench.dir/src/GameCharacter.cpp.s: cmake_force
 CMakeFiles/bench.dir/src/Menu.cpp.o: CMakeFiles/bench.dir/flags.make
 CMakeFiles/bench.dir/src/Menu.cpp.o: ../src/Menu.cpp
 CMakeFiles/bench.dir/src/Menu.cpp.o: CMakeFiles/bench.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/bench.dir/src/Menu.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/bench.dir/src/Menu.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bench.dir/src/Menu.cpp.o -MF CMakeFiles/bench.dir/src/Menu.cpp.o.d -o CMakeFiles/bench.dir/src/Menu.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Menu.cpp
 
 CMakeFiles/bench.dir/src/Menu.cpp.i: cmake_force
@@ -195,24 +181,10 @@ CMakeFiles/bench.dir/src/Menu.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bench.dir/src/Menu.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Menu.cpp -o CMakeFiles/bench.dir/src/Menu.cpp.s
 
-CMakeFiles/bench.dir/src/Player.cpp.o: CMakeFiles/bench.dir/flags.make
-CMakeFiles/bench.dir/src/Player.cpp.o: ../src/Player.cpp
-CMakeFiles/bench.dir/src/Player.cpp.o: CMakeFiles/bench.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/bench.dir/src/Player.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bench.dir/src/Player.cpp.o -MF CMakeFiles/bench.dir/src/Player.cpp.o.d -o CMakeFiles/bench.dir/src/Player.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Player.cpp
-
-CMakeFiles/bench.dir/src/Player.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/bench.dir/src/Player.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Player.cpp > CMakeFiles/bench.dir/src/Player.cpp.i
-
-CMakeFiles/bench.dir/src/Player.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bench.dir/src/Player.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Player.cpp -o CMakeFiles/bench.dir/src/Player.cpp.s
-
 CMakeFiles/bench.dir/src/Tile.cpp.o: CMakeFiles/bench.dir/flags.make
 CMakeFiles/bench.dir/src/Tile.cpp.o: ../src/Tile.cpp
 CMakeFiles/bench.dir/src/Tile.cpp.o: CMakeFiles/bench.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/bench.dir/src/Tile.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/bench.dir/src/Tile.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bench.dir/src/Tile.cpp.o -MF CMakeFiles/bench.dir/src/Tile.cpp.o.d -o CMakeFiles/bench.dir/src/Tile.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Tile.cpp
 
 CMakeFiles/bench.dir/src/Tile.cpp.i: cmake_force
@@ -226,7 +198,7 @@ CMakeFiles/bench.dir/src/Tile.cpp.s: cmake_force
 CMakeFiles/bench.dir/src/Pathfinding.cpp.o: CMakeFiles/bench.dir/flags.make
 CMakeFiles/bench.dir/src/Pathfinding.cpp.o: ../src/Pathfinding.cpp
 CMakeFiles/bench.dir/src/Pathfinding.cpp.o: CMakeFiles/bench.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/bench.dir/src/Pathfinding.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/bench.dir/src/Pathfinding.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bench.dir/src/Pathfinding.cpp.o -MF CMakeFiles/bench.dir/src/Pathfinding.cpp.o.d -o CMakeFiles/bench.dir/src/Pathfinding.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Pathfinding.cpp
 
 CMakeFiles/bench.dir/src/Pathfinding.cpp.i: cmake_force
@@ -240,7 +212,7 @@ CMakeFiles/bench.dir/src/Pathfinding.cpp.s: cmake_force
 CMakeFiles/bench.dir/src/Map.cpp.o: CMakeFiles/bench.dir/flags.make
 CMakeFiles/bench.dir/src/Map.cpp.o: ../src/Map.cpp
 CMakeFiles/bench.dir/src/Map.cpp.o: CMakeFiles/bench.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/bench.dir/src/Map.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/bench.dir/src/Map.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bench.dir/src/Map.cpp.o -MF CMakeFiles/bench.dir/src/Map.cpp.o.d -o CMakeFiles/bench.dir/src/Map.cpp.o -c /home/lapo/Documenti/codice/c++/Elaborato_2021-2022/src/Map.cpp
 
 CMakeFiles/bench.dir/src/Map.cpp.i: cmake_force
@@ -258,11 +230,9 @@ bench_OBJECTS = \
 "CMakeFiles/bench.dir/src/Application.cpp.o" \
 "CMakeFiles/bench.dir/src/Button.cpp.o" \
 "CMakeFiles/bench.dir/src/DialoguePanel.cpp.o" \
-"CMakeFiles/bench.dir/src/Enemy.cpp.o" \
 "CMakeFiles/bench.dir/src/Entity.cpp.o" \
 "CMakeFiles/bench.dir/src/GameCharacter.cpp.o" \
 "CMakeFiles/bench.dir/src/Menu.cpp.o" \
-"CMakeFiles/bench.dir/src/Player.cpp.o" \
 "CMakeFiles/bench.dir/src/Tile.cpp.o" \
 "CMakeFiles/bench.dir/src/Pathfinding.cpp.o" \
 "CMakeFiles/bench.dir/src/Map.cpp.o"
@@ -275,11 +245,9 @@ bench: CMakeFiles/bench.dir/src/Input.cpp.o
 bench: CMakeFiles/bench.dir/src/Application.cpp.o
 bench: CMakeFiles/bench.dir/src/Button.cpp.o
 bench: CMakeFiles/bench.dir/src/DialoguePanel.cpp.o
-bench: CMakeFiles/bench.dir/src/Enemy.cpp.o
 bench: CMakeFiles/bench.dir/src/Entity.cpp.o
 bench: CMakeFiles/bench.dir/src/GameCharacter.cpp.o
 bench: CMakeFiles/bench.dir/src/Menu.cpp.o
-bench: CMakeFiles/bench.dir/src/Player.cpp.o
 bench: CMakeFiles/bench.dir/src/Tile.cpp.o
 bench: CMakeFiles/bench.dir/src/Pathfinding.cpp.o
 bench: CMakeFiles/bench.dir/src/Map.cpp.o
@@ -289,7 +257,7 @@ bench: /usr/lib/libsfml-window.so.2.5.1
 bench: /usr/lib/libsfml-audio.so.2.5.1
 bench: /usr/lib/libsfml-system.so.2.5.1
 bench: CMakeFiles/bench.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable bench"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable bench"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/bench.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
