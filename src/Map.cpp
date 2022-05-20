@@ -188,13 +188,28 @@ void Map::save(const std::string& filePath) const {
 
 void Map::render(sf::RenderWindow& window) {
 	auto& view = window.getView(); 
-	for (float j = std::max<float>(view.getCenter().y - view.getSize().y*0.5f -cellDim.y, 0.f); j < std::min<float>(view.getCenter().y + view.getSize().y * 0.5 + cellDim.y,dim.y*cellDim.y); j += cellDim.y)
-		for (float i = std::max<float>(view.getCenter().x - view.getSize().x * 0.5f - cellDim.x, 0.f); i < std::min<float>(view.getCenter().x + view.getSize().x * 0.5f + cellDim.x,dim.x*cellDim.y); i += cellDim.x) {
-			auto tile = Map::getEntity(posToIndex(i, j));
-			if (tile) tile->render(window);
-			auto gameCharater = Map::getEntity(posToIndex(i,j));
-			if (gameCharater) gameCharater->render(window);
-		}
+	float top = std::max<float>(view.getCenter().y - view.getSize().y * 0.5f - cellDim.y, 0.f);
+	float bottom = std::min<float>(view.getCenter().y + view.getSize().y * 0.5 + cellDim.y, dim.y * cellDim.y);
+	float left = std::max<float>(view.getCenter().x - view.getSize().x * 0.5f - cellDim.x, 0.f);
+	float right = std::min<float>(view.getCenter().x + view.getSize().x * 0.5f + cellDim.x, dim.x * cellDim.y);
+
+	int nCells = ((bottom - top)/cellDim.x) * ((right - left)/cellDim.y);
+	int nEntities = gameCharacters.size() + tiles.size();
+
+	if(nCells < nEntities)
+		for (float j = top; j < bottom; j += cellDim.y)
+			for (float i = left; i < right; i += cellDim.x) {
+				auto tile = Map::getEntity(posToIndex(i, j));
+				auto gameCharater = Map::getEntity(posToIndex(i,j));
+				if (tile) tile->render(window);
+				else if (gameCharater) gameCharater->render(window);
+			}
+	else {
+		for (auto i = gameCharacters.begin(); i != gameCharacters.end(); ++i)
+			i->second->render(window);
+		for (auto i = tiles.begin(); i != tiles.end(); ++i)
+			i->second->render(window);
+	}
 }
 
 void Map::move(const sf::Vector2<int>& start, const sf::Vector2<int>& end) {
