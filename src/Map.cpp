@@ -193,7 +193,7 @@ void Map::render(sf::RenderWindow& window) {
 	float left = std::max<float>(view.getCenter().x - view.getSize().x * 0.5f - cellDim.x, 0.f);
 	float right = std::min<float>(view.getCenter().x + view.getSize().x * 0.5f + cellDim.x, dim.x * cellDim.y);
 
-	int nCells = ((bottom - top)/cellDim.x) * ((right - left)/cellDim.y);
+	int nCells = ((bottom - top)/cellDim.y) * ((right - left)/cellDim.x);
 	int nEntities = gameCharacters.size() + tiles.size();
 
 	if(nCells < nEntities)
