@@ -1,4 +1,6 @@
 #include "../headers/GameCharacter.h"
+
+#include "../headers/Pathfinding.h"
 #include <iostream>
 
 uint8_t GameCharacter::getInitiative() const {

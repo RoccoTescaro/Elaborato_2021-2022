@@ -3,6 +3,8 @@
 
 #include "Entity.h"
 
+class PathAlgorithm;
+
 class GameCharacter : public Entity {
 public:
 	GameCharacter(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, uint8_t maxHealthPoints, uint8_t hp, uint8_t maxActionPoints, uint8_t ap, uint8_t initiative) :
@@ -14,6 +16,8 @@ protected:
 	uint8_t hp;
 	const uint8_t maxActionPoints = 0;
 	uint8_t ap;
+
+    static PathAlgorithm *movementStrategy;
 
 	const uint8_t initiative;
 };
