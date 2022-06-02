@@ -1,7 +1,8 @@
 #include "../headers/GameCharacter.h"
-
+#include "../headers/Map.h"
 #include "../headers/Pathfinding.h"
 #include <iostream>
+
 
 uint8_t GameCharacter::getInitiative() const {
 	return initiative;
@@ -11,7 +12,7 @@ uint8_t GameCharacter::getInitiative() const {
 
 Melee::Melee(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, uint8_t hp, uint8_t ap)
 	: GameCharacter(pos, size, 100, hp, 20, ap, 8)
-{
+{	
 	testingSprite.setFillColor({ 200, 20, 20, 64 });
 }
 
@@ -112,13 +113,29 @@ bool Ranged::isSolid() const {
 	return true;
 }
 
-////////////////////////RANGED///////////////////////////
+////////////////////////Player///////////////////////////
+PathAlgorithm* Player::movementStrategy=nullptr;
 
 Player::Player(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, uint8_t hp, uint8_t ap)
 	: GameCharacter(pos, size, 100, hp, 20, ap, 0)
 {
 	testingSprite.setFillColor({ 20, 200, 20, 64 });
 }
+
+void Player::setMovement(Map &map){
+
+	if(!Player::movementStrategy)
+		Player::movementStrategy=new A_Star(map);
+
+}
+
+
+PathAlgorithm*  Player::getMovement() {
+
+	return Player::movementStrategy;
+
+}
+
 
 std::string Player::serialize() const {
 	return "Player {" +

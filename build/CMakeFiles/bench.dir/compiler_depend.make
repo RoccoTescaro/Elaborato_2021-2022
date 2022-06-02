@@ -2120,6 +2120,15 @@ CMakeFiles/bench.dir/src/GameCharacter.cpp.o: ../src/GameCharacter.cpp \
   /usr/include/SFML/Graphics/Sprite.hpp \
   /usr/include/SFML/Graphics/Text.hpp \
   /usr/include/SFML/Graphics/VertexBuffer.hpp \
+  ../headers/Map.h \
+  /usr/include/c++/11.2.0/fstream \
+  /usr/include/c++/11.2.0/istream \
+  /usr/include/c++/11.2.0/bits/istream.tcc \
+  /usr/include/c++/11.2.0/x86_64-pc-linux-gnu/bits/basic_file.h \
+  /usr/include/c++/11.2.0/x86_64-pc-linux-gnu/bits/c++io.h \
+  /usr/include/c++/11.2.0/bits/fstream.tcc \
+  ../headers/Tile.h \
+  ../headers/GameCharacter.h \
   ../headers/Pathfinding.h \
   /usr/include/c++/11.2.0/list \
   /usr/include/c++/11.2.0/bits/stl_list.h \
@@ -2207,8 +2216,6 @@ CMakeFiles/bench.dir/src/GameCharacter.cpp.o: ../src/GameCharacter.cpp \
   /usr/include/c++/11.2.0/ccomplex \
   /usr/include/c++/11.2.0/complex \
   /usr/include/c++/11.2.0/sstream \
-  /usr/include/c++/11.2.0/istream \
-  /usr/include/c++/11.2.0/bits/istream.tcc \
   /usr/include/c++/11.2.0/bits/sstream.tcc \
   /usr/include/c++/11.2.0/cfenv \
   /usr/include/c++/11.2.0/fenv.h \
@@ -2227,10 +2234,6 @@ CMakeFiles/bench.dir/src/GameCharacter.cpp.o: ../src/GameCharacter.cpp \
   /usr/include/c++/11.2.0/deque \
   /usr/include/c++/11.2.0/bits/stl_deque.h \
   /usr/include/c++/11.2.0/bits/deque.tcc \
-  /usr/include/c++/11.2.0/fstream \
-  /usr/include/c++/11.2.0/x86_64-pc-linux-gnu/bits/basic_file.h \
-  /usr/include/c++/11.2.0/x86_64-pc-linux-gnu/bits/c++io.h \
-  /usr/include/c++/11.2.0/bits/fstream.tcc \
   /usr/include/c++/11.2.0/iomanip \
   /usr/include/c++/11.2.0/bits/quoted_string.h \
   /usr/include/c++/11.2.0/iostream \

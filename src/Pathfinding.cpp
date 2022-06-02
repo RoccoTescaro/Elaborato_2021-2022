@@ -62,7 +62,7 @@ std::list<Vector2i> A_Star::tracePath(std::vector<std::vector<node>> nodeInfo,Ve
 }
 
 
-std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flying,sf::RenderWindow &window){
+std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flying){
     // saving map info
     int mapX=map.getDim().x;
     int mapY=map.getDim().y;
