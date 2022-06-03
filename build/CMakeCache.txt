@@ -26,8 +26,8 @@ CMAKE_BUILD_TYPE:STRING=Debug
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
 
-//No help, variable specified on the command line.
-CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++
+//CXX compiler
+CMAKE_CXX_COMPILER:STRING=/usr/bin/g++
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -52,8 +52,8 @@ CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
 //Flags used by the CXX compiler during RELWITHDEBINFO builds.
 CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 
-//No help, variable specified on the command line.
-CMAKE_C_COMPILER:FILEPATH=/usr/bin/gcc
+//C compiler
+CMAKE_C_COMPILER:STRING=/usr/bin/gcc
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -213,15 +213,6 @@ SFML_DIR:PATH=/usr/lib64/cmake/SFML
 
 //Path to a file.
 SFML_DOC_DIR:PATH=SFML_DOC_DIR-NOTFOUND
-
-//Value Computed by CMake
-coding_BINARY_DIR:STATIC=/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build
-
-//Value Computed by CMake
-coding_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-coding_SOURCE_DIR:STATIC=/home/lapo/Documenti/codice/c++/Elaborato_2021-2022
 
 //Value Computed by CMake
 project_BINARY_DIR:STATIC=/home/lapo/Documenti/codice/c++/Elaborato_2021-2022/build
