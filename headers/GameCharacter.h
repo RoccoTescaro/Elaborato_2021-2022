@@ -29,8 +29,8 @@ class Melee : public GameCharacter {
 public:
     Melee(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, uint8_t hp, uint8_t ap);
 
-    void setMovement(Map &map) override{};
-    PathAlgorithm *getMovement() override{};
+    void setMovement(Map &map) override;
+    PathAlgorithm *getMovement() override;
 
     void update(const float& dt) override {}; //#TODO
     void execute(Entity* entity) override {}; //#TODO
@@ -49,8 +49,8 @@ class Bat : public GameCharacter {
 public:
     Bat(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, uint8_t hp, uint8_t ap);
 
-    void setMovement(Map &map) override{};
-    PathAlgorithm *getMovement() override{};
+    void setMovement(Map &map) override;
+    PathAlgorithm *getMovement() override;
 
     void update(const float& dt) override {}; //#TODO
     void execute(Entity* entity) override {}; //#TODO
@@ -68,8 +68,8 @@ class Ranged : public GameCharacter {
 public:
     Ranged(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, uint8_t hp, uint8_t ap);
 
-    void setMovement(Map &map) override{};
-    PathAlgorithm *getMovement() override{};
+    void setMovement(Map &map) override;
+    PathAlgorithm *getMovement() override;
 
     void update(const float& dt) override {}; //#TODO
     void execute(Entity* entity) override {}; //#TODO

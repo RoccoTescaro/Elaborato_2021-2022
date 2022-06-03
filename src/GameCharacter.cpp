@@ -9,11 +9,25 @@ uint8_t GameCharacter::getInitiative() const {
 }
 
 //////////////////////////MELEE//////////////////////////
+PathAlgorithm* Melee::movementStrategy=nullptr;
 
 Melee::Melee(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, uint8_t hp, uint8_t ap)
 	: GameCharacter(pos, size, 100, hp, 20, ap, 8)
 {	
 	testingSprite.setFillColor({ 200, 20, 20, 64 });
+}
+void Melee::setMovement(Map &map){
+
+	if(!Melee::movementStrategy)
+		Melee::movementStrategy=new A_Star(map);
+
+}
+
+
+PathAlgorithm*  Melee::getMovement() {
+
+	return Melee::movementStrategy;
+
 }
 
 std::string Melee::serialize() const {
@@ -44,6 +58,7 @@ bool Melee::isSolid() const {
 }
 
 //////////////////////////BAT///////////////////////////
+PathAlgorithm* Bat::movementStrategy=nullptr;
 
 Bat::Bat(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, uint8_t hp, uint8_t ap) :
 	GameCharacter(pos, size, 100, hp, 20, ap, 5)
@@ -51,6 +66,19 @@ Bat::Bat(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, uint8_t 
 	testingSprite.setFillColor({ 220, 20, 20, 64 });
 }
 
+void Bat::setMovement(Map &map){
+
+	if(!Bat::movementStrategy)
+		Bat::movementStrategy=new A_Star(map);
+
+}
+
+
+PathAlgorithm*  Bat::getMovement() {
+
+	return Bat::movementStrategy;
+
+}
 std::string Bat::serialize() const {
 	return "Bat {" +
 		std::to_string(testingSprite.getPosition().x) + "," +
@@ -79,12 +107,27 @@ bool Bat::isSolid() const {
 }
 
 ////////////////////////RANGED///////////////////////////
+PathAlgorithm* Ranged::movementStrategy=nullptr;
 
 Ranged::Ranged(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, uint8_t hp, uint8_t ap) :
 	GameCharacter(pos, size, 100, hp, 20, ap, 3)
 {
 	testingSprite.setFillColor({ 240, 20, 20, 64 });
 }
+void Ranged::setMovement(Map &map){
+
+	if(!Ranged::movementStrategy)
+		Ranged::movementStrategy=new A_Star(map);
+
+}
+
+
+PathAlgorithm*  Ranged::getMovement() {
+
+	return Ranged::movementStrategy;
+
+}
+
 
 std::string Ranged::serialize() const {
 	return "Ranged {" +
@@ -114,6 +157,7 @@ bool Ranged::isSolid() const {
 }
 
 ////////////////////////Player///////////////////////////
+
 PathAlgorithm* Player::movementStrategy=nullptr;
 
 Player::Player(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, uint8_t hp, uint8_t ap)
@@ -121,7 +165,6 @@ Player::Player(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, ui
 {
 	testingSprite.setFillColor({ 20, 200, 20, 64 });
 }
-
 void Player::setMovement(Map &map){
 
 	if(!Player::movementStrategy)

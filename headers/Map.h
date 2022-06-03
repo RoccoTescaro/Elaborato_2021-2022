@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <fstream>
 #include <unordered_map>
+#include <memory>
 #include "Entity.h"
 #include "Tile.h"
 #include "GameCharacter.h"

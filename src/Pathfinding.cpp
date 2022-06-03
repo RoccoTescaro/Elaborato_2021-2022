@@ -86,7 +86,8 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
     //initialize open list
     std::set<Pair,fCompare> openList;
     openList.insert(std::make_pair(0,start));
-
+    int startH=calculateHValue(start,target);
+    Pair minimumNode={startH,start};
     bool destFound=false;
     //starting exploration
     while(!openList.empty()){
@@ -112,145 +113,55 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
         //init necessary value
         int gNew,hNew,fNew;
         //New node generation and exploration
-        //---------left------------
-        std::cout<<"-----left-----"<<std::endl;
-        if(isValid({i-1,j},flying)){
-            if(isDestination({i-1,j},target)){
-               
-                nodeInfo[i - 1][j].parentPos.x = i;
-                nodeInfo[i - 1][j].parentPos.y = j;
+        std::vector<sf::Vector2i> possibleSteps={{i-1,j},{i+1,j},{i,j-1},{i,j+1}};
 
-                        std::cout<<" new node built:parentPos:"<<nodeInfo[i - 1][j].parentPos.x<<"-"<<nodeInfo[i - 1][j].parentPos.y<<std::endl;
-                printf("The destination cell is found: left\n");
-                destFound = true; 
-                    //costruisci e rendi la listadi passi
-                return tracePath(nodeInfo,target);
-            }
-            else if(closedList[i-1][j]==false){
-                //calcolo f
-                gNew = nodeInfo[i][j].g + 1.0;
-                hNew = calculateHValue(sf::Vector2i({i-1,j}), target);
-                fNew = gNew + hNew;
- 
-                if(nodeInfo[i-1][j].f==INT32_MAX||
-                   nodeInfo[i-1][j].f>fNew){
-                       openList.insert(std::make_pair(fNew,sf::Vector2i({i-1,j})));
-                       //update node info
-                        nodeInfo[i - 1][j].f = fNew;
-                        nodeInfo[i - 1][j].g = gNew;
-                        nodeInfo[i - 1][j].h = hNew;
-                        nodeInfo[i - 1][j].parentPos.x = i;
-                        nodeInfo[i - 1][j].parentPos.y = j;
-                        std::cout<<" new node built:parentPos:"<<nodeInfo[i - 1][j].parentPos.x<<"-"<<nodeInfo[i - 1][j].parentPos.y<<std::endl;
+        for(auto k:possibleSteps){
+            std::cout<<"-----left-----"<<std::endl;
+            if(isValid(k,flying)){
+                if(isDestination(k,target)){
+                
+                    nodeInfo[k.x][k.y].parentPos.x = i;
+                    nodeInfo[k.x][k.y].parentPos.y = j;
 
-                   }
+                            std::cout<<" new node built:parentPos:"<<nodeInfo[k.x][k.y].parentPos.x<<"-"<<nodeInfo[k.x][k.y].parentPos.y<<std::endl;
+                    
+                    destFound = true; 
+                        //costruisci e rendi la listadi passi
+                    return tracePath(nodeInfo,target);
+                }
+                else if(closedList[k.x][k.y]==false){
+                    //calcolo f
+                    gNew = nodeInfo[k.x][k.y].g + 1.0;
+                    hNew = calculateHValue(sf::Vector2i(k), target);
+                    fNew = gNew + hNew;
+                    if(fNew<minimumNode.first){
+                        minimumNode.first=fNew;
+                        minimumNode.second=k;
+                    }
+                    if(nodeInfo[k.x][k.y].f==INT32_MAX||
+                    nodeInfo[k.x][k.y].f>fNew){
+                        openList.insert(std::make_pair(fNew,sf::Vector2i(k)));
+                        //update node info
+                            nodeInfo[k.x][k.y].f = fNew;
+                            nodeInfo[k.x][k.y].g = gNew;
+                            nodeInfo[k.x][k.y].h = hNew;
+                            nodeInfo[k.x][k.y].parentPos.x = i;
+                            nodeInfo[k.x][k.y].parentPos.y = j;
+                            std::cout<<" new node built:parentPos:"<<nodeInfo[k.x][k.y].parentPos.x<<"-"<<nodeInfo[k.x][k.y].parentPos.y<<std::endl;
+
+                    }
+                }
             }
+
         }
-        //---------rigth------------
-        std::cout<<"-----rigth-----"<<std::endl;
-        if(isValid({i+1,j},flying)){
-            if(isDestination({i+1,j},target)){
-               
-                nodeInfo[i + 1][j].parentPos.x = i;
-                nodeInfo[i + 1][j].parentPos.y = j;
 
-                        std::cout<<" new node built:parentPos:"<<nodeInfo[i - 1][j].parentPos.x<<"-"<<nodeInfo[i - 1][j].parentPos.y<<std::endl;
-                printf("The destination cell is found: rigth\n");
-                destFound = true; 
-                    //costruisci e rendi la listadi passi
-                return tracePath(nodeInfo,target);
-            }
-            else if(closedList[i+1][j]==false){
-                //calcolo f
-                gNew = nodeInfo[i][j].g + 1.0;
-                hNew = calculateHValue(sf::Vector2i({i+1,j}), target);
-                fNew = gNew + hNew;
- 
-                if(nodeInfo[i+1][j].f==INT32_MAX||
-                   nodeInfo[i+1][j].f>fNew){
-                       openList.insert(std::make_pair(fNew,sf::Vector2i({i+1,j})));
-                       //update node info
-                        nodeInfo[i + 1][j].f = fNew;
-                        nodeInfo[i + 1][j].g = gNew;
-                        nodeInfo[i + 1][j].h = hNew;
-                        nodeInfo[i + 1][j].parentPos.x = i;
-                        nodeInfo[i + 1][j].parentPos.y = j;
-                        std::cout<<" new node built:parentPos:"<<nodeInfo[i - 1][j].parentPos.x<<"-"<<nodeInfo[i - 1][j].parentPos.y<<std::endl;
-                   }
-            }
-        }
-        //---------top------------
-        std::cout<<"-----top-----"<<std::endl;
-        if(isValid({i,j-1},flying)){
-            if(isDestination({i,j-1},target)){
-               
-                nodeInfo[i][j-1].parentPos.x = i;
-                nodeInfo[i][j-1].parentPos.y = j;
 
-                        std::cout<<" new node built:parentPos:"<<nodeInfo[i - 1][j].parentPos.x<<"-"<<nodeInfo[i - 1][j].parentPos.y<<std::endl;
-                printf("The destination cell is found: top\n");
-                destFound = true; 
-                    //costruisci e rendi la listadi passi
-                return tracePath(nodeInfo,target);
-            }
-            else if(closedList[i][j-1]==false){
-                //calcolo f
-                gNew = nodeInfo[i][j].g + 1.0;
-                hNew = calculateHValue(sf::Vector2i({i,j-1}), target);
-                fNew = gNew + hNew;
- 
-                if(nodeInfo[i][j-1].f==INT32_MAX||
-                   nodeInfo[i][j-1].f>fNew){
-                       openList.insert(std::make_pair(fNew,sf::Vector2i({i,j-1})));
-                       //update node info
-                        nodeInfo[i][j-1].f = fNew;
-                        nodeInfo[i][j-1].g = gNew;
-                        nodeInfo[i][j-1].h = hNew;
-                        nodeInfo[i][j-1].parentPos.x = i;
-                        nodeInfo[i][j-1].parentPos.y = j;
 
-                        std::cout<<" new node built:parentPos:"<<nodeInfo[i - 1][j].parentPos.x<<"-"<<nodeInfo[i - 1][j].parentPos.y<<std::endl;
-                   }
-            }
-        }
-        //---------bottpm------------
-        std::cout<<"-----bottpm-----"<<std::endl;
-        if(isValid({i,j+1},flying)){
-            if(isDestination({i,j+1},target)){
-               
-                nodeInfo[i][j+1].parentPos.x = i;
-                nodeInfo[i][j+1].parentPos.y = j;
-
-                        std::cout<<" new node built:parentPos:"<<nodeInfo[i - 1][j].parentPos.x<<"-"<<nodeInfo[i - 1][j].parentPos.y<<std::endl;
-                printf("The destination cell is found: bottpm\n");
-                destFound = true; 
-                    //costruisci e rendi la listadi passi
-                return tracePath(nodeInfo,target);
-            }
-            else if(closedList[i][j+1]==false){
-                //calcolo f
-                gNew = nodeInfo[i][j].g + 1.0;
-                hNew = calculateHValue(sf::Vector2i({i,j+1}), target);
-                fNew = gNew + hNew;
- 
-                if(nodeInfo[i][j+1].f==INT32_MAX||
-                   nodeInfo[i][j+1].f>fNew){
-                       openList.insert(std::make_pair(fNew,sf::Vector2i({i,j+1})));
-                       //update node info
-                        nodeInfo[i][j+1].f = fNew;
-                        nodeInfo[i][j+1].g = gNew;
-                        nodeInfo[i][j+1].h = hNew;
-                        nodeInfo[i][j+1].parentPos.x = i;
-                        nodeInfo[i][j+1].parentPos.y = j;
-                        std::cout<<" new node built:parentPos:"<<nodeInfo[i - 1][j].parentPos.x<<"-"<<nodeInfo[i - 1][j].parentPos.y<<std::endl;
-                   }
-            }
-        }
         std::cout<<"-size:"<<openList.size()<<std::endl;
     }
     if (destFound==false){
-        std::list<Vector2i> emptyList;
-        return emptyList;
+        
+        return tracePath(nodeInfo,minimumNode.second);
     }
 
 };
