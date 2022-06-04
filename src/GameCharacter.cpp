@@ -117,7 +117,7 @@ Ranged::Ranged(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, ui
 void Ranged::setMovement(Map &map){
 
 	if(!Ranged::movementStrategy)
-		Ranged::movementStrategy=new A_Star(map);
+		Ranged::movementStrategy=new DiglettMovement(map);
 
 }
 

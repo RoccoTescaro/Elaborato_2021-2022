@@ -6,8 +6,17 @@
 class PathAlgorithm;
 class Map;
 
+
+
+
+
 class GameCharacter : public Entity {
 public:
+
+    enum actionType{EXECUTE,MOVE};
+    typedef std::pair<actionType,sf::Vector2i>action;
+
+
 	GameCharacter(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, uint8_t maxHealthPoints, uint8_t hp, uint8_t maxActionPoints, uint8_t ap, uint8_t initiative) :
 		Entity(pos, size), maxHealthPoints(maxHealthPoints), hp(hp), maxActionPoints(maxActionPoints), ap(ap), initiative(initiative) {};
     virtual ~GameCharacter(){};
@@ -21,7 +30,7 @@ protected:
 	const uint8_t maxActionPoints = 0;
 	uint8_t ap;
 
-
+    std::vector<action> actionQueue;
 	const uint8_t initiative;
 };
 

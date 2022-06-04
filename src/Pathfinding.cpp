@@ -18,11 +18,14 @@ bool PathAlgorithm::isDestination(Vector2i pos,Vector2i target){
     return (pos==target);
 }
 
-int PathAlgorithm::calculateHValue(Vector2i pos, Vector2i target){
+int PathAlgorithm::calculateDistance(Vector2i pos, Vector2i target){
     std::cout<<"          calculateHValue "<<std::endl;
     std::cout<<"         exit::"<<(abs(pos.x-target.x)+abs(pos.y-target.y))<<std::endl;
 return (abs(pos.x-target.x)+abs(pos.y-target.y));
 }
+
+
+/////////////////////////A_STAR///////////////////////////////7
 
 std::list<Vector2i> A_Star::tracePath(std::vector<std::vector<node>> nodeInfo,Vector2i target){
     std::cout<<"STARTING TRACEPATH ALGORITHM"<<std::endl;
@@ -86,7 +89,7 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
     //initialize open list
     std::set<Pair,fCompare> openList;
     openList.insert(std::make_pair(0,start));
-    int startH=calculateHValue(start,target);
+    int startH=calculateDistance(start,target);
     Pair minimumNode={startH,start};
     bool destFound=false;
     //starting exploration
@@ -132,7 +135,7 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
                 else if(closedList[k.x][k.y]==false){
                     //calcolo f
                     gNew = nodeInfo[k.x][k.y].g + 1.0;
-                    hNew = calculateHValue(sf::Vector2i(k), target);
+                    hNew = calculateDistance(sf::Vector2i(k), target);
                     fNew = gNew + hNew;
                     if(fNew<minimumNode.first){
                         minimumNode.first=fNew;
@@ -165,3 +168,60 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
     }
 
 };
+/////////////////////////DIGLETT_MOVEMENT///////////////////////////////7
+
+
+
+bool DiglettMovement::isReachable(Vector2i start, Vector2i end, bool flying){
+    return 0;
+};
+        
+        
+
+
+
+std::list<Vector2i> DiglettMovement::findPath(Vector2i start, Vector2i target, bool flying){
+
+
+    int speed=2;
+    int maxDistance=3;
+    //initialize open list
+    int distanceValue=-1;
+    std::vector<sf::Vector2i> possibleTargets;
+    for (int i = 0; i < 1+2*maxDistance; i++)
+    {
+        for (int j = 0; j < 1+2*maxDistance; j++)
+        {
+            sf::Vector2i pos={target.x-3+i,target.y-3+j};
+            int newDistanceValue=calculateDistance(pos,target);
+            if(isReachable(start,pos)&&newDistanceValue>=distanceValue){
+                if(newDistanceValue>distanceValue)
+                   possibleTargets.clear();
+                possibleTargets.push_back(pos);
+                }
+        }
+    }
+    int r=rand()%possibleTargets.size();
+    std::list<Vector2i> finalDestination={{possibleTargets.at(r).x,possibleTargets.at(r).y}};
+    return finalDestination;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
