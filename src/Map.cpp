@@ -55,6 +55,8 @@ void Map::appendEntity(uint32_t index, Entity* entity) {
 	else if (tile && !Map::isOccupied(index, Map::entityLayer::tileLayer, entity->isSolid())) {
 		tiles.emplace(index, tile);
 		DEBUG("Tile allocated, key:{%}", index);
+		if(tile->isSolid())
+			lightingSystem.updateCell(Map::indexToPos(index), *this);
 	}
 	else
 		delete entity;
@@ -78,7 +80,10 @@ void Map::removeEntity(const sf::Vector2<int>& pos, Map::entityLayer layer) {
 
 void Map::removeEntity(uint32_t index, Map::entityLayer layer) {
 	if ((layer == Map::entityLayer::gameCharacterLayer || layer == Map::entityLayer::any) && gameCharacters.erase(index)) DEBUG("GameCharacter removed, key:{%}", index);
-	if ((layer == Map::entityLayer::tileLayer || layer == Map::entityLayer::any) && tiles.erase(index)) DEBUG("Tile removed, key:{%}", index);
+	if ((layer == Map::entityLayer::tileLayer || layer == Map::entityLayer::any) && tiles.erase(index)) {
+		lightingSystem.updateCell(Map::indexToPos(index), *this);
+		DEBUG("Tile removed, key:{%}", index); 
+	}
 }
 
 Entity* Map::operator()(float x, float y, Map::entityLayer layer) const {
@@ -210,6 +215,8 @@ void Map::render(sf::RenderWindow& window) {
 		for (auto i = tiles.begin(); i != tiles.end(); ++i)
 			i->second->render(window);
 	}
+
+	lightingSystem.render(window);
 }
 
 void Map::move(const sf::Vector2<int>& start, const sf::Vector2<int>& end) {
@@ -259,5 +266,15 @@ const sf::Vector2<int>& Map::getDim() const {
 
 const sf::Vector2<float>& Map::getCellDim() const{
 	return cellDim;
+}
+
+const std::unordered_map<uint32_t, std::unique_ptr<Tile>>& Map::getTileMap() const
+{
+	return tiles;
+}
+
+const std::unordered_map<uint32_t, std::unique_ptr<GameCharacter>>& Map::getGameCharacterMap() const
+{
+	return gameCharacters;
 }
 

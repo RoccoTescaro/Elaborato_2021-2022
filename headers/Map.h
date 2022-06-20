@@ -6,6 +6,7 @@
 #include "Entity.h"
 #include "Tile.h"
 #include "GameCharacter.h"
+#include "LightingSystem.h"
 
 class Map {
 public:
@@ -14,7 +15,7 @@ public:
 	Map();
 	Map(const std::string& filePath);
 
-	void appendEntity(float x, float y, Entity* entity); // not really wanna use template but i could
+	void appendEntity(float x, float y, Entity* entity);
 	void appendEntity(int x, int y, Entity* entity);
 	void appendEntity(const sf::Vector2<float>& pos, Entity* entity);
 	void appendEntity(const sf::Vector2<int>& pos, Entity* entity);
@@ -53,6 +54,8 @@ public:
 	const sf::Vector2<int>& getDim() const;
 	const sf::Vector2<float>& getCellDim() const;
 
+	const std::unordered_map<uint32_t, std::unique_ptr<Tile>>& getTileMap() const;
+	const std::unordered_map<uint32_t, std::unique_ptr<GameCharacter>>& getGameCharacterMap() const;
 private:
 	void appendEntity(uint32_t index, Entity* entity);
 	void removeEntity(uint32_t index, Map::entityLayer layer = entityLayer::any);
@@ -66,7 +69,9 @@ private:
 	std::unordered_map<uint32_t, std::unique_ptr<GameCharacter>> gameCharacters;
 
 	sf::Vector2<int> dim;
-	const sf::Vector2<float> cellDim{ 48.f, 48.f }; //#TODO float or int?
+	const sf::Vector2<float> cellDim{ 48.f, 48.f };
+	
+	LightingSystem lightingSystem;
 };
 
 

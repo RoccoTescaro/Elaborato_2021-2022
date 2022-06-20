@@ -1,6 +1,7 @@
 #include "../headers/Tile.h"
 #include "../headers/Log.h"
 
+
 ///////////////////////////WALL//////////////////////////
 
 Wall::Wall(const sf::Vector2<float>& pos, const sf::Vector2<float>& size) : Tile(pos, size) {

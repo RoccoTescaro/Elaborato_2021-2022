@@ -7,6 +7,7 @@
 class Tile : public Entity {
 public:
 	Tile(const sf::Vector2<float>& pos, const sf::Vector2<float>& size) : Entity(pos, size) {};
+
 protected:
 
 };
