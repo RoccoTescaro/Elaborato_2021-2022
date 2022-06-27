@@ -5,7 +5,7 @@
 
 class Entity {
 public:
-	Entity(const sf::Vector2<float>& pos, const sf::Vector2<float>& size);
+	Entity(const sf::Vector2<int>& pos, const sf::Vector2<int>& size);
 	virtual ~Entity() = default;
 
 	virtual void render(sf::RenderWindow& window);

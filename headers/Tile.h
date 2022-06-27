@@ -6,7 +6,7 @@
 
 class Tile : public Entity {
 public:
-	Tile(const sf::Vector2<float>& pos, const sf::Vector2<float>& size) : Entity(pos, size) {};
+	Tile(const sf::Vector2<int>& pos, const sf::Vector2<int>& size) : Entity(pos, size) {};
 protected:
 
 };
@@ -14,7 +14,7 @@ protected:
 
 class Wall : public Tile {
 public:
-	Wall(const sf::Vector2<float>& pos, const sf::Vector2<float>& size);
+	Wall(const sf::Vector2<int>& pos, const sf::Vector2<int>& size);
 
 	void update(const float& dt) override {}; //#TODO
 	void execute(Entity* entity) override {}; //#TODO
@@ -29,7 +29,7 @@ private:
 
 class Hole : public Tile {
 public:
-	Hole(const sf::Vector2<float>& pos, const sf::Vector2<float>& size);
+	Hole(const sf::Vector2<int>& pos, const sf::Vector2<int>& size);
 
 	void update(const float& dt) override {}; //#TODO
 	void execute(Entity* entity) override {}; //#TODO

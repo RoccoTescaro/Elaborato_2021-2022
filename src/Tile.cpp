@@ -3,12 +3,12 @@
 
 ///////////////////////////WALL//////////////////////////
 
-Wall::Wall(const sf::Vector2<float>& pos, const sf::Vector2<float>& size) : Tile(pos, size) {
+Wall::Wall(const sf::Vector2<int>& pos, const sf::Vector2<int>& size) : Tile(pos, size) {
 	testingSprite.setFillColor({ 128, 0, 255, 64 });
 }
 
 std::string Wall::serialize() const {
-	return "Wall {" +
+	return " {" +
 		std::to_string(testingSprite.getPosition().x) + "," +
 		std::to_string(testingSprite.getPosition().y) + "," +
 		std::to_string(testingSprite.getSize().x) + "," +
@@ -19,11 +19,11 @@ Entity* Wall::deserialize(std::string line) {
 	std::vector<std::string> parameters;
 	parseString(parameters, line);
 	
-	float posX = std::stof(parameters[0]);
-	float posY = std::stof(parameters[1]);
-	float sizeX = std::stof(parameters[2]);
-	float sizeY = std::stof(parameters[3]);
-	return new Wall({ posX,posY }, { sizeX,sizeY });
+	int posX = std::stoi(parameters[0]);
+	int posY = std::stoi(parameters[1]);
+	int sizeX = std::stoi(parameters[2]);
+	int sizeY = std::stoi(parameters[3]);
+	return new Wall({ posX/sizeX,posY/sizeY }, { sizeX,sizeY });
 }
 
 bool Wall::isSolid() const{
@@ -32,12 +32,12 @@ bool Wall::isSolid() const{
 
 ///////////////////////////HOLE//////////////////////////
 
-Hole::Hole(const sf::Vector2<float>& pos, const sf::Vector2<float>& size) : Tile(pos, size) {
+Hole::Hole(const sf::Vector2<int>& pos, const sf::Vector2<int>& size) : Tile(pos, size) {
 	testingSprite.setFillColor({ 10, 0, 40, 64 });
 }
 
 std::string Hole::serialize() const {
-	return "Hole {" +
+	return " {" +
 		std::to_string(testingSprite.getPosition().x) + "," +
 		std::to_string(testingSprite.getPosition().y) + "," +
 		std::to_string(testingSprite.getSize().x) + "," +
@@ -48,11 +48,11 @@ Entity* Hole::deserialize(std::string line) {
 	std::vector<std::string> parameters;
 	parseString(parameters, line);
 
-	float posX = std::stof(parameters[0]);
-	float posY = std::stof(parameters[1]);
-	float sizeX = std::stof(parameters[2]);
-	float sizeY = std::stof(parameters[3]);
-	return new Hole({ posX,posY }, { sizeX,sizeY });
+	int posX = std::stoi(parameters[0]);
+	int posY = std::stoi(parameters[1]);
+	int sizeX = std::stoi(parameters[2]);
+	int sizeY = std::stoi(parameters[3]);
+	return new Hole({ posX/sizeX,posY/sizeY }, { sizeX,sizeY });
 }
 
 bool Hole::isSolid() const {

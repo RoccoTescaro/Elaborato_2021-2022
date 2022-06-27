@@ -5,7 +5,7 @@
 
 class GameCharacter : public Entity {
 public:
-	GameCharacter(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, uint8_t maxHealthPoints, uint8_t hp, uint8_t maxActionPoints, uint8_t ap, uint8_t initiative) :
+	GameCharacter(const sf::Vector2<int>& pos, const sf::Vector2<int>& size, uint8_t maxHealthPoints, uint8_t hp, uint8_t maxActionPoints, uint8_t ap, uint8_t initiative) :
 		Entity(pos, size), maxHealthPoints(maxHealthPoints), hp(hp), maxActionPoints(maxActionPoints), ap(ap), initiative(initiative) {};
 
 	uint8_t getInitiative() const;
@@ -20,7 +20,7 @@ protected:
 
 class Melee : public GameCharacter {
 public:
-    Melee(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, uint8_t hp, uint8_t ap);
+    Melee(const sf::Vector2<int>& pos, const sf::Vector2<int>& size, uint8_t hp, uint8_t ap);
 
     void update(const float& dt) override {}; //#TODO
     void execute(Entity* entity) override {}; //#TODO
@@ -35,7 +35,7 @@ private:
 
 class Bat : public GameCharacter {
 public:
-    Bat(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, uint8_t hp, uint8_t ap);
+    Bat(const sf::Vector2<int>& pos, const sf::Vector2<int>& size, uint8_t hp, uint8_t ap);
 
     void update(const float& dt) override {}; //#TODO
     void execute(Entity* entity) override {}; //#TODO
@@ -50,7 +50,7 @@ private:
 
 class Ranged : public GameCharacter {
 public:
-    Ranged(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, uint8_t hp, uint8_t ap);
+    Ranged(const sf::Vector2<int>& pos, const sf::Vector2<int>& size, uint8_t hp, uint8_t ap);
 
     void update(const float& dt) override {}; //#TODO
     void execute(Entity* entity) override {}; //#TODO
@@ -65,7 +65,7 @@ private:
 
 class Player : public GameCharacter {
 public:
-    Player(const sf::Vector2<float>& pos, const sf::Vector2<float>& size, uint8_t hp, uint8_t ap);
+    Player(const sf::Vector2<int>& pos, const sf::Vector2<int>& size, uint8_t hp, uint8_t ap);
 
     void update(const float& dt) override {}; //#TODO
     void execute(Entity* entity) override {}; //#TODO
