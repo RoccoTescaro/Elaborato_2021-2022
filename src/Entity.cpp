@@ -1,8 +1,8 @@
 #include "../headers/Entity.h"
 
-Entity::Entity(const sf::Vector2<float>& pos, const sf::Vector2<float>& size) {
-	testingSprite.setPosition(pos);
-	testingSprite.setSize(size);
+Entity::Entity(const sf::Vector2<int>& pos, const sf::Vector2<int>& size) {
+	testingSprite.setPosition(pos.x*size.x,pos.y*size.y);
+	testingSprite.setSize({ float(size.x),float(size.y) });
 }
 
 void Entity::render(sf::RenderWindow& window) {
