@@ -118,7 +118,7 @@ std::list<Vector2i> A_Star::findPath(Vector2i start, Vector2i target, bool flyin
         //New node generation and exploration
         std::vector<sf::Vector2i> possibleSteps={{i-1,j},{i+1,j},{i,j-1},{i,j+1}};
 
-        for(auto k:possibleSteps){
+        for(auto &k:possibleSteps){
             std::cout<<"-----left-----"<<std::endl;
             if(isValid(k,flying)){
                 if(isDestination(k,target)){
