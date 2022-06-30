@@ -37,12 +37,13 @@ cmake-build-debug/
 .idea/
 CMakeLists.txt
 main.cpp
+.vs/
+Dependencies/
 Elaborato2020-2021.sln
 Elaborato2020-2021.vcxproj
 Elaborato2020-2021.vcxproj.filters
 Elaborato2020-2021.vcxproj.user
-.vs/
-Dependencies/
 bin/
 x64/
+build/
 ################

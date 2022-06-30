@@ -46,7 +46,7 @@ exit(sf::Vector2<float>(0,window_.getSize().y*0.125*6),sf::Vector2<int>(window_.
 
 void Menu::update() {
     time +=dt ;
-    input.updateKeys(window);
+    input.updateInputStatus(window);
 
     //UPDATE RENDERER
     //vignette
