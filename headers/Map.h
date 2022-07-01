@@ -8,6 +8,16 @@
 #include "GameCharacter.h"
 #include "Log.h"
 
+struct Bounds {
+public:
+	sf::Vector2<int> min{ INT_MAX,INT_MAX };
+	sf::Vector2<int> max{ INT_MIN,INT_MIN };
+	sf::Vector2<int> getDim() 
+	{
+		return { max.x - min.x,max.y - min.y };
+	}
+};
+
 class Map {
 public:
 	Map();
@@ -39,6 +49,8 @@ public:
 	sf::Vector2<float> posToWorldCoord(const sf::Vector2<int>& pos) const;
 
 	sf::Vector2<int> getCellDim() const;
+
+	const Bounds& getBounds();
 private:
 	template<class Type> void record();
 
@@ -59,6 +71,8 @@ private:
 
 	uint32_t nEntities;
 	const sf::Vector2<int> cellDim{ 48, 48 };
+
+	Bounds bounds;
 };
 
 
