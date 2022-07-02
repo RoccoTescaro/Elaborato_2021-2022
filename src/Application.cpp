@@ -13,7 +13,6 @@ Application::Application(sf::Vector2<unsigned int> windowDim_){
     sf::Event ev{};
     while(window.isOpen()){
         if(!state) return;
-        while(window.pollEvent(ev)) if(ev.type == sf::Event::Closed)window.close();
         state->update();
         window.clear();
         state->render();

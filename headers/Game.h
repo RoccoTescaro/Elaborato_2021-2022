@@ -14,7 +14,7 @@ private:
     sf::View view;
     sf::View gui;
     const float viewZoomSpeed = 0.02f;
-    float viewMovementSpeed;
+    float viewMovementSpeed = 1.f;
     //MAP
     Map map;
     //MOUSE

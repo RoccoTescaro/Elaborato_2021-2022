@@ -3,6 +3,7 @@
 //
 
 #include "../headers/Input.h"
+#include "../headers/Log.h"
 
 const sf::Vector2f &Input::getMousePos() const {
 
@@ -17,6 +18,7 @@ bool Input::getKeyState(Input::keys key) {
 
 
 void Input::updateInputStatus( sf::RenderWindow &window) {
+    WheelDelta = 0;
 
     sf::Vector2i relativePos = sf::Mouse::getPosition(window);
 
@@ -30,25 +32,15 @@ void Input::updateInputStatus( sf::RenderWindow &window) {
     KeyPressed[Input::keys::MouseL]=sf::Mouse::isButtonPressed(sf::Mouse::Left);
     KeyPressed[Input::keys::Enter]=sf::Keyboard::isKeyPressed(sf::Keyboard::Enter);
 
-    while (window.pollEvent(event))
-    
-    switch (event.type)
-    {
-        case sf::Event::MouseWheelScrolled:
-            WheelDelta=event.mouseWheelScroll.delta;
-            break;
-        // window closed
-        case sf::Event::Closed:
-            window.close();
-            break;
-            
-        default:
-            break;
+    while (window.pollEvent(event)) {
+        if (event.type == sf::Event::Closed) window.close();
+        else if (event.type == sf::Event::MouseWheelMoved)
+            WheelDelta = event.mouseWheel.delta;
     }
 }
 
 
-float Input::getWheelDelta() const {
+float Input::getWheelDelta() const{
     return WheelDelta;
 }
 

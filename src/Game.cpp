@@ -27,12 +27,13 @@ void Game::update()
 		(sf::Vector2<float>(window.mapPixelToCoords(sf::Mouse::getPosition(window), view)) - sf::Vector2<float>(view.getCenter())).y * input.getWheelDelta() * viewZoomSpeed
 			  );
 
-	viewMovementSpeed -= input.getWheelDelta() * 32.;
+	viewMovementSpeed -= input.getWheelDelta();
+	viewMovementSpeed = std::fmax(viewMovementSpeed, 1.); //TODO fix me
 
 	int viewDirX = input.getKeyState(Input::keys::D) - input.getKeyState(Input::keys::A);
 	int viewDirY = input.getKeyState(Input::keys::S) - input.getKeyState(Input::keys::W);
 
-	view.setCenter(view.getCenter().x + viewDirX * viewMovementSpeed * dt , view.getCenter().y + viewDirY * viewMovementSpeed * dt);
+	view.setCenter(view.getCenter().x + viewDirX * map.getCellDim().x * viewMovementSpeed * dt, view.getCenter().y + viewDirY * map.getCellDim().y * viewMovementSpeed * dt);
 
 	//map.update();
 }
@@ -43,4 +44,5 @@ void Game::render()
 	map.render(window);
 	window.draw(mouseIndicator);
 	window.setView(gui);
+	window.setView(view);
 }
