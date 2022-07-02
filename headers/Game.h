@@ -10,6 +10,11 @@ public:
     void update() override;
     void render() override;
 private:
+    //WINDOW STUFF
+    sf::View view;
+    sf::View gui;
+    const float viewZoomSpeed = 0.02f;
+    float viewMovementSpeed;
     //MAP
     Map map;
     //MOUSE

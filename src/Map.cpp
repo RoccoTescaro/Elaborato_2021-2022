@@ -226,30 +226,30 @@ const Bounds& Map::getBounds()
 	for (auto& tileType : tiles)
 		for (auto& tile : tileType.second) 
 		{
-			if (tile.first.x < dim.min.x)
-				dim.min.x = tile.first.x;
-			else if (tile.first.x > dim.max.x)
-				dim.max.x = tile.first.x;
+			if (tile.first.x < bounds.min.x)
+				bounds.min.x = tile.first.x;
+			else if (tile.first.x > bounds.max.x)
+				bounds.max.x = tile.first.x;
 
-			if (tile.first.y < dim.min.y)
-				dim.min.y = tile.first.y;
-			else if (tile.first.y > dim.max.y)
-				dim.max.y = tile.first.y;
+			if (tile.first.y < bounds.min.y)
+				bounds.min.y = tile.first.y;
+			else if (tile.first.y > bounds.max.y)
+				bounds.max.y = tile.first.y;
 		}
 
 	for (auto& gameCharacterType : gameCharacters)
 		for (auto& gameCharacter : gameCharacterType.second)
 		{
-			if (gameCharacter.first.x < dim.min.x)
-				dim.min.x = gameCharacter.first.x;
-			else if (gameCharacter.first.x > dim.max.x)
-				dim.max.x = gameCharacter.first.x;
+			if (gameCharacter.first.x < bounds.min.x)
+				bounds.min.x = gameCharacter.first.x;
+			else if (gameCharacter.first.x > bounds.max.x)
+				bounds.max.x = gameCharacter.first.x;
 
-			if (gameCharacter.first.y < dim.min.y)
-				dim.min.y = gameCharacter.first.y;
-			else if (gameCharacter.first.y > dim.max.y)
-				dim.max.y = gameCharacter.first.y;
+			if (gameCharacter.first.y < bounds.min.y)
+				bounds.min.y = gameCharacter.first.y;
+			else if (gameCharacter.first.y > bounds.max.y)
+				bounds.max.y = gameCharacter.first.y;
 		}
 
-	return dim;
+	return bounds;
 }
