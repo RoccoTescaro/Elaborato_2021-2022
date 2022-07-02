@@ -1,6 +1,8 @@
 #include <iostream>
 #include <valarray>
 #include "../headers/Menu.h"
+#include "../headers/Application.h"
+#include "../headers/Game.h"
 
 Menu::Menu(Application* app_,sf::RenderWindow& window_,const float& dt_) :
 State(app_,window_,dt_),
@@ -75,6 +77,9 @@ void Menu::update() {
         }
     }
 
+    //SWITCH STATE
+    if (vignetteIntensity <= 0.05f) 
+        app->setState(new Game(app,window,dt));
 }
 
 void Menu::render() {
