@@ -5,43 +5,51 @@
 #include "../headers/Input.h"
 #include "../headers/Log.h"
 
-const sf::Vector2f &Input::getMousePos() const {
+void Input::update(sf::RenderWindow& window, const sf::View* view){
+    //UPDATE MOUSE POS
+    if (!view)
+        view = &window.getDefaultView();
 
-    return MousePos;
-}
-
-bool Input::getKeyState(Input::keys key) {
-
-    return KeyPressed[key];
-}
-
-
-
-void Input::updateInputStatus( sf::RenderWindow &window) {
-    WheelDelta = 0;
-
-    sf::Vector2i relativePos = sf::Mouse::getPosition(window);
-
-    MousePos= window.mapPixelToCoords(relativePos);
-
-    KeyPressed[Input::keys::W]=sf::Keyboard::isKeyPressed(sf::Keyboard::W);
-    KeyPressed[Input::keys::A]=sf::Keyboard::isKeyPressed(sf::Keyboard::A);
-    KeyPressed[Input::keys::S]=sf::Keyboard::isKeyPressed(sf::Keyboard::S);
-    KeyPressed[Input::keys::D]=sf::Keyboard::isKeyPressed(sf::Keyboard::D);
-    KeyPressed[Input::keys::MouseR]=sf::Mouse::isButtonPressed(sf::Mouse::Right);
-    KeyPressed[Input::keys::MouseL]=sf::Mouse::isButtonPressed(sf::Mouse::Left);
-    KeyPressed[Input::keys::Enter]=sf::Keyboard::isKeyPressed(sf::Keyboard::Enter);
-
-    while (window.pollEvent(event)) {
+    mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window),*view);
+     
+    WheelDelta = 0.f;
+    while (window.pollEvent(event)) { //handle Wheel changes but also other events
         if (event.type == sf::Event::Closed) window.close();
         else if (event.type == sf::Event::MouseWheelMoved)
             WheelDelta = event.mouseWheel.delta;
     }
+
+    //UPDATE KEYS
+    oldKeys = newKeys;
+    newKeys[Key::W] = sf::Keyboard::isKeyPressed(sf::Keyboard::W);
+    newKeys[Key::A] = sf::Keyboard::isKeyPressed(sf::Keyboard::A);
+    newKeys[Key::S] = sf::Keyboard::isKeyPressed(sf::Keyboard::S);
+    newKeys[Key::D] = sf::Keyboard::isKeyPressed(sf::Keyboard::D);
+    newKeys[Key::MouseR] = sf::Mouse::isButtonPressed(sf::Mouse::Right);
+    newKeys[Key::MouseL] = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+    newKeys[Key::Enter] = sf::Keyboard::isKeyPressed(sf::Keyboard::Enter);
+
 }
 
+const sf::Vector2<float>& Input::getMousePos() const {
+    return mousePos;
+}
 
-float Input::getWheelDelta() const{
+const float& Input::getWheelDelta() const {
     return WheelDelta;
 }
+
+bool Input::isKeyPressed(Input::Key key) const {
+    return newKeys[key] && !oldKeys[key];
+}
+
+bool Input::isKeyDown(Input::Key key) const {
+    return newKeys[key];
+}
+
+bool Input::isKeyReleased(Input::Key key) const {
+    return !newKeys[key] && oldKeys[key];
+}
+
 
 

@@ -48,7 +48,7 @@ exit(sf::Vector2<float>(0,window_.getSize().y*0.125*6),sf::Vector2<int>(window_.
 
 void Menu::update() {
     time +=dt ;
-    input.updateInputStatus(window);
+    input.update(window);
 
     //UPDATE RENDERER
     //vignette
@@ -66,13 +66,13 @@ void Menu::update() {
 
     if(start.isMouseOver(input.getMousePos())){
         start.setTextColor(sf::Color(255,255,255,255));
-        if(input.getKeyState(Input::keys::MouseL)) {
+        if(input.isKeyReleased(Input::Key::MouseL)) {
             switchScene = true;
         }
     }
     else if(exit.isMouseOver(input.getMousePos())){
         exit.setTextColor(sf::Color(255,255,255,255));
-        if(input.getKeyState(Input::keys::MouseL)){
+        if(input.isKeyReleased(Input::Key::MouseL)){
             window.close();
         }
     }

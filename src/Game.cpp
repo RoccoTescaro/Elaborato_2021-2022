@@ -16,7 +16,7 @@ Game::Game(Application* app_, sf::RenderWindow& window_, const float& dt_) : Sta
 void Game::update()
 {
 	//MOUSE
-	input.updateInputStatus(window);
+	input.update(window, &view);
 	mousePos = map.worldCoordToPos(input.getMousePos());
 	mouseIndicator.setPosition(map.posToWorldCoord(mousePos));
 
@@ -27,11 +27,10 @@ void Game::update()
 		(sf::Vector2<float>(window.mapPixelToCoords(sf::Mouse::getPosition(window), view)) - sf::Vector2<float>(view.getCenter())).y * input.getWheelDelta() * viewZoomSpeed
 			  );
 
-	viewMovementSpeed -= input.getWheelDelta();
-	viewMovementSpeed = std::fmax(viewMovementSpeed, 1.); //TODO fix me
+	viewMovementSpeed = view.getSize().x * 0.02; //view speed based on zoom
 
-	int viewDirX = input.getKeyState(Input::keys::D) - input.getKeyState(Input::keys::A);
-	int viewDirY = input.getKeyState(Input::keys::S) - input.getKeyState(Input::keys::W);
+	int viewDirX = input.isKeyDown(Input::Key::D) - input.isKeyDown(Input::Key::A);
+	int viewDirY = input.isKeyDown(Input::Key::S) - input.isKeyDown(Input::Key::W);
 
 	view.setCenter(view.getCenter().x + viewDirX * map.getCellDim().x * viewMovementSpeed * dt, view.getCenter().y + viewDirY * map.getCellDim().y * viewMovementSpeed * dt);
 
@@ -44,5 +43,4 @@ void Game::render()
 	map.render(window);
 	window.draw(mouseIndicator);
 	window.setView(gui);
-	window.setView(view);
 }
